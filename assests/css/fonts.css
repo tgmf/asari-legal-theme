@@ -1,0 +1,35 @@
+/**
+ * Asari Legal Theme - Custom Fonts
+ */
+
+/* CoFo Gothic Trial - Light (200) */
+@font-face {
+    font-family: "CoFo Gothic Trial";
+    src: url("../fonts/cofo-gothic-trial-light.woff2") format("woff2"),
+         url("../fonts/cofo-gothic-trial-light.woff") format("woff");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Manege Trial - Light (300) */
+@font-face {
+    font-family: "Manege Trial";
+    src: url("../fonts/manege-trial-light.woff2") format("woff2"),
+         url("../fonts/manege-trial-light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Fallback font declarations for better loading */
+.has-cofo-gothic-font-family,
+.wp-block-site-title,
+.wp-block-post-title,
+h1, h2, h3, h4, h5, h6 {
+    font-family: "CoFo Gothic Trial", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.has-manege-font-family {
+    font-family: "Manege Trial", Georgia, "Times New Roman", Times, serif;
+}
