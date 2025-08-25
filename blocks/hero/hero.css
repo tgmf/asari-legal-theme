@@ -1,0 +1,171 @@
+/**
+ * Hero Block Styles
+ */
+
+.wp-block-asari-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--wp--preset--color--asari-black);
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* Background Image */
+.wp-block-asari-hero .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: var(--hero-bg-image);
+    z-index: 1;
+}
+
+/* Overlay */
+.wp-block-asari-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+/* Content Container */
+.wp-block-asari-hero .hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: var(--wp--style--global--content-size);
+    width: 100%;
+    padding: var(--wp--preset--spacing--large);
+    text-align: var(--hero-text-alignment, center);
+}
+
+/* Top Text */
+.wp-block-asari-hero .hero-top-text {
+    font-family: var(--wp--preset--font-family--cofo-gothic);
+    font-size: var(--wp--preset--font-size--b2);
+    font-weight: 200;
+    margin-bottom: var(--wp--preset--spacing--medium);
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Bottom Text (Main Heading) */
+.wp-block-asari-hero .hero-bottom-text {
+    font-family: var(--wp--preset--font-family--cofo-gothic);
+    font-size: var(--wp--preset--font-size--h1);
+    font-weight: 200;
+    line-height: 1.1;
+    margin-top: var(--wp--preset--spacing--medium);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+/* Alignment Variations */
+.wp-block-asari-hero[data-text-alignment="left"] .hero-content {
+    text-align: left;
+}
+
+.wp-block-asari-hero[data-text-alignment="right"] .hero-content {
+    text-align: right;
+}
+
+.wp-block-asari-hero[data-text-alignment="center"] .hero-content {
+    text-align: center;
+}
+
+/* Wide and Full Width Alignments */
+.wp-block-asari-hero.alignwide {
+    width: var(--wp--style--global--wide-size);
+    max-width: 100%;
+}
+
+.wp-block-asari-hero.alignfull {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(-100vw / 2 + 100% / 2);
+    margin-right: calc(-100vw / 2 + 100% / 2);
+}
+
+/* Empty Placeholder */
+.wp-block-asari-hero.is-empty-placeholder {
+    min-height: 200px;
+    background: var(--wp--preset--color--asari-warm-gray);
+    color: var(--wp--preset--color--asari-gray);
+    border: 2px dashed var(--wp--preset--color--asari-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wp-block-asari-hero {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wp-block-asari-hero .hero-content {
+        padding: var(--wp--preset--spacing--medium);
+    }
+    
+    .wp-block-asari-hero .hero-top-text {
+        font-size: var(--wp--preset--font-size--b3);
+        margin-bottom: var(--wp--preset--spacing--small);
+    }
+    
+    .wp-block-asari-hero .hero-bottom-text {
+        font-size: var(--wp--preset--font-size--h2);
+        margin-top: var(--wp--preset--spacing--small);
+    }
+}
+
+@media (max-width: 480px) {
+    .wp-block-asari-hero .hero-content {
+        padding: var(--wp--preset--spacing--small);
+    }
+    
+    .wp-block-asari-hero .hero-bottom-text {
+        font-size: var(--wp--preset--font-size--h3);
+    }
+    
+    .wp-block-asari-hero {
+        min-height: 40vh;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .wp-block-asari-hero {
+        min-height: auto;
+        page-break-inside: avoid;
+    }
+    
+    .wp-block-asari-hero .hero-overlay {
+        display: none;
+    }
+}

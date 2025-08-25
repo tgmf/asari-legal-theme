@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schemas.wp.org/wp/6.8/block.json",
+    "apiVersion": 3,
+    "name": "asari/hero",
+    "title": "Hero Section",
+    "description": "A customizable hero section with background image and text",
+    "category": "asari-blocks",
+    "icon": "cover-image",
+    "keywords": ["hero", "banner", "cover", "intro"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "hero.php"
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "top_text": "Welcome to",
+                "bottom_text": "Asari Legal - Leading Legal Expertise",
+                "image": {
+                    "url": "https://via.placeholder.com/1400x1000/B8CBE5/FFFFFF?text=Hero+Background"
+                },
+                "text_alignment": "center"
+            }
+        }
+    },
+    "textdomain": "asari-legal-theme",
+    "script": "file:./hero.js",
+    "editorStyle": "file:./hero-editor.css",
+    "style": "file:./hero.css"
+}

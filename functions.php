@@ -73,97 +73,27 @@ function asari_legal_editor_styles() {
 add_action('after_setup_theme', 'asari_legal_editor_styles');
 
 /**
- * Register ACF blocks (when ACF Pro is active)
+ * Register ACF blocks 
  */
-function asari_legal_register_acf_blocks() {
-    if (function_exists('acf_register_block_type')) {
+function asari_legal_register_blocks() {
+    // Register blocks using block.json files
+    $block_dirs = array(
+        'hero',
+        // Add other block directories here as you create them
+        // 'employee-grid',
+        // 'practice-showcase',
+        // etc.
+    );
+    
+    foreach ($block_dirs as $block_dir) {
+        $block_path = get_template_directory() . '/blocks/' . $block_dir;
         
-        // Employee Grid Block
-        acf_register_block_type(array(
-            'name'              => 'employee-grid',
-            'title'             => 'Employee Grid',
-            'description'       => 'Display a grid of team members with filtering',
-            'render_template'   => 'blocks/employee-grid.php',
-            'category'          => 'asari-blocks',
-            'icon'              => 'groups',
-            'keywords'          => array('team', 'employees', 'grid'),
-            'supports'          => array('align' => array('wide', 'full')),
-        ));
-        
-        // Practice Showcase Block
-        acf_register_block_type(array(
-            'name'              => 'practice-showcase',
-            'title'             => 'Practice Showcase',
-            'description'       => 'Display practice areas in a showcase layout',
-            'render_template'   => 'blocks/practice-showcase.php',
-            'category'          => 'asari-blocks',
-            'icon'              => 'portfolio',
-            'keywords'          => array('practice', 'expertise', 'showcase'),
-            'supports'          => array('align' => array('wide', 'full')),
-        ));
-        
-        // Industry Grid Block
-        acf_register_block_type(array(
-            'name'              => 'industry-grid',
-            'title'             => 'Industry Grid',
-            'description'       => 'Display industries we serve',
-            'render_template'   => 'blocks/industry-grid.php',
-            'category'          => 'asari-blocks',
-            'icon'              => 'admin-multisite',
-            'keywords'          => array('industry', 'sectors', 'grid'),
-            'supports'          => array('align' => array('wide', 'full')),
-        ));
-        
-        // Event List Block
-        acf_register_block_type(array(
-            'name'              => 'event-list',
-            'title'             => 'Event List',
-            'description'       => 'Display upcoming events and webinars',
-            'render_template'   => 'blocks/event-list.php',
-            'category'          => 'asari-blocks',
-            'icon'              => 'calendar-alt',
-            'keywords'          => array('events', 'calendar', 'list'),
-            'supports'          => array('align' => array('wide', 'full')),
-        ));
-        
-        // Vacancy List Block
-        acf_register_block_type(array(
-            'name'              => 'vacancy-list',
-            'title'             => 'Vacancy List',
-            'description'       => 'Display current job openings',
-            'render_template'   => 'blocks/vacancy-list.php',
-            'category'          => 'asari-blocks',
-            'icon'              => 'businessman',
-            'keywords'          => array('jobs', 'careers', 'vacancies'),
-            'supports'          => array('align' => array('wide', 'full')),
-        ));
-        
-        // Office Info Block
-        acf_register_block_type(array(
-            'name'              => 'office-info',
-            'title'             => 'Office Information',
-            'description'       => 'Display office contact details and map',
-            'render_template'   => 'blocks/office-info.php',
-            'category'          => 'asari-blocks',
-            'icon'              => 'building',
-            'keywords'          => array('office', 'contact', 'address'),
-            'supports'          => array('align' => array('wide', 'full')),
-        ));
-        
-        // News & Publications Block
-        acf_register_block_type(array(
-            'name'              => 'news-grid',
-            'title'             => 'News & Publications',
-            'description'       => 'Display latest news and publications with filtering',
-            'render_template'   => 'blocks/news-grid.php',
-            'category'          => 'asari-blocks',
-            'icon'              => 'admin-post',
-            'keywords'          => array('news', 'publications', 'articles'),
-            'supports'          => array('align' => array('wide', 'full')),
-        ));
+        if (file_exists($block_path . '/block.json')) {
+            register_block_type($block_path);
+        }
     }
 }
-add_action('acf/init', 'asari_legal_register_acf_blocks');
+add_action('init', 'asari_legal_register_blocks');
 
 /**
  * Add custom block category
@@ -181,22 +111,6 @@ function asari_legal_block_categories($categories) {
     );
 }
 add_filter('block_categories_all', 'asari_legal_block_categories');
-
-/**
- * Customize ACF admin (if ACF Pro is active)
- */
-function asari_legal_customize_acf() {
-    if (function_exists('acf_add_options_page')) {
-        // Add theme options page
-        acf_add_options_page(array(
-            'page_title'    => 'Theme Options',
-            'menu_title'    => 'Theme Options',
-            'menu_slug'     => 'theme-options',
-            'capability'    => 'manage_options',
-        ));
-    }
-}
-add_action('acf/init', 'asari_legal_customize_acf');
 
 /**
  * Remove unwanted WordPress features
@@ -227,3 +141,9 @@ function asari_legal_hide_admin_bar() {
     }
 }
 add_action('wp_loaded', 'asari_legal_hide_admin_bar');
+
+function asari_legal_mime_types( $mimes ) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter( 'upload_mimes', 'asari_legal_mime_types' );

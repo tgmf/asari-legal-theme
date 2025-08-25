@@ -1,0 +1,115 @@
+/**
+ * Hero Block Editor Styles
+ * Styles specific to the block editor interface
+ */
+
+/* Editor-specific overrides */
+.wp-block-asari-hero {
+    /* Ensure proper display in editor */
+    position: relative !important;
+    min-height: 300px;
+    color: black;
+}
+
+/* Editor preview mode adjustments */
+.block-editor-block-preview__content .wp-block-asari-hero {
+    min-height: 200px;
+}
+
+/* Block appender styling */
+.wp-block-asari-hero .block-list-appender {
+    position: relative;
+    z-index: 4;
+}
+
+/* Selected state */
+.wp-block.is-selected .wp-block-asari-hero {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: -2px;
+}
+
+/* Editor placeholder */
+.wp-block-asari-hero.is-empty-placeholder {
+    background: var(--wp--preset--color--asari-soft-gray);
+    color: var(--wp--preset--color--asari-gray);
+    border: 2px dashed var(--wp--preset--color--asari-gray);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--wp--preset--font-family--cofo-gothic);
+    font-size: var(--wp--preset--font-size--b3);
+}
+
+.wp-block-asari-hero.is-empty-placeholder p {
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Block controls visibility */
+.wp-block-asari-hero:hover .block-editor-block-list__block-edit::before {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: -2px;
+}
+
+/* Editor-specific content adjustments */
+.block-editor-writing-flow .wp-block-asari-hero .hero-content {
+    pointer-events: none; /* Prevent text selection conflicts */
+}
+
+.block-editor-writing-flow .wp-block-asari-hero.is-selected .hero-content {
+    pointer-events: auto;
+}
+
+/* Preview mode specific styles */
+.acf-block-preview .wp-block-asari-hero {
+    animation: none; /* Disable animations in preview */
+}
+
+.acf-block-preview .wp-block-asari-hero .hero-top-text,
+.acf-block-preview .wp-block-asari-hero .hero-bottom-text {
+    animation: none;
+}
+
+/* Responsive editor preview */
+@media (max-width: 782px) {
+    .wp-block-asari-hero {
+        min-height: 250px;
+    }
+    
+    .wp-block-asari-hero .hero-content {
+        padding: var(--wp--preset--spacing--small);
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .wp-block-asari-hero.is-empty-placeholder {
+        border-width: 3px;
+        background: transparent;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wp-block-asari-hero,
+    .wp-block-asari-hero .hero-top-text,
+    .wp-block-asari-hero .hero-bottom-text {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Focus states for accessibility */
+.wp-block-asari-hero:focus-within {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: 2px;
+}
+
+/* Block toolbar positioning */
+.wp-block.is-selected .wp-block-asari-hero .block-editor-block-contextual-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
