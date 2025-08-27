@@ -14,3 +14,84 @@ Text Domain: asari-legal-theme
 Tags: 
 */
 
+/* Make the header sticky */
+.wp-site-blocks > header,
+.site-header,
+header[class*="wp-block-template-part"] {
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    background-color: var(--wp--preset--color--asari-white);
+    transition: all 0.3s ease;
+}
+
+.admin-bar .wp-site-blocks > header,
+.admin-bar .site-header,
+.admin-bar header[class*="wp-block-template-part"] {
+    top: var(--wp-admin--admin-bar--height);
+}
+
+/* Alternative: Make header fixed instead of sticky */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add padding to body to compensate for fixed header */
+body.has-fixed-header {
+    padding-top: var(--header-height, 80px);
+}
+
+/* Sticky header scrolled state (optional enhancement) */
+.wp-site-blocks > header.scrolled,
+.site-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* Ensure navigation stays visible */
+.wp-site-blocks > header .wp-block-navigation,
+.site-header .wp-block-navigation {
+    z-index: 1001;
+}
+
+/* Mobile navigation adjustments */
+@media (max-width: 768px) {
+    .wp-site-blocks > header,
+    .site-header {
+        position: sticky; /* Keep sticky on mobile */
+    }
+    
+    /* Mobile navigation overlay */
+    .wp-block-navigation__responsive-container.is-menu-open {
+        position: fixed;
+        top: var(--header-height, 80px);
+        z-index: 999;
+    }
+}
+
+/* Smooth scrolling offset for anchor links */
+html {
+    scroll-padding-top: var(--header-height, 80px);
+}
+
+/* Animation for header visibility on scroll */
+.header-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.header-visible {
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}

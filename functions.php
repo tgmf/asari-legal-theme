@@ -61,6 +61,14 @@ function asari_legal_scripts() {
         array(),
         wp_get_theme()->get('Version')
     );
+    
+    // Utility classes - load after main styles
+    wp_enqueue_style(
+        'asari-legal-utilities',
+        get_template_directory_uri() . '/assets/css/utilities.css',
+        array('asari-legal-style'), // Depend on main styles
+        wp_get_theme()->get('Version')
+    );
 }
 add_action('wp_enqueue_scripts', 'asari_legal_scripts');
 
