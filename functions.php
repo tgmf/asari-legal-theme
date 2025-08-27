@@ -73,10 +73,14 @@ function asari_legal_scripts() {
 add_action('wp_enqueue_scripts', 'asari_legal_scripts');
 
 /**
- * Add custom fonts to editor
+ * Enqueue editor styles including utilities
  */
 function asari_legal_editor_styles() {
+    // Add fonts
     add_editor_style(get_template_directory_uri() . '/assets/css/fonts.css');
+    
+    // Add utilities to editor
+    add_editor_style(get_template_directory_uri() . '/assets/css/utilities.css');
 }
 add_action('after_setup_theme', 'asari_legal_editor_styles');
 

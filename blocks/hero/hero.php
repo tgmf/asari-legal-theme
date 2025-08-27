@@ -69,12 +69,12 @@ if (!$top_text && !$bottom_text && !$is_preview) {
     <?php if ($bg_alt): ?>aria-label="<?php echo $bg_alt; ?>"<?php endif; ?>
 >
     
-    <div class="hero-overlay"></div>
-    
-    <div class="hero-content">
+    <div class="hero-content h-full">
         <?php if ($top_text) : ?>
             <div class="hero-top-text">
-                <?php echo wp_kses_post($top_text); ?>
+                <span class="hero-top-text-inner font-menage">
+                    <?php echo wp_kses_post($top_text); ?>
+                </span>
             </div>
         <?php endif; ?>
             
@@ -84,7 +84,9 @@ if (!$top_text && !$bottom_text && !$is_preview) {
         
         <?php if ($bottom_text) : ?>
             <div class="hero-bottom-text">
-                <?php echo wp_kses_post($bottom_text); ?>
+                <span class="hero-bottom-text-inner font-cofo">
+                    <?php echo wp_kses_post($bottom_text); ?>
+                </span>
             </div>
         <?php endif; ?>
     </div>

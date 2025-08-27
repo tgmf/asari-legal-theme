@@ -47,7 +47,7 @@ header[class*="wp-block-template-part"] {
 
 /* Add padding to body to compensate for fixed header */
 body.has-fixed-header {
-    padding-top: var(--header-height, 80px);
+    padding-top: var(--header-height, 128px);
 }
 
 /* Sticky header scrolled state (optional enhancement) */
@@ -75,14 +75,14 @@ body.has-fixed-header {
     /* Mobile navigation overlay */
     .wp-block-navigation__responsive-container.is-menu-open {
         position: fixed;
-        top: var(--header-height, 80px);
+        top: var(--header-height, 128px);
         z-index: 999;
     }
 }
 
 /* Smooth scrolling offset for anchor links */
 html {
-    scroll-padding-top: var(--header-height, 80px);
+    scroll-padding-top: var(--header-height, 128px);
 }
 
 /* Animation for header visibility on scroll */
