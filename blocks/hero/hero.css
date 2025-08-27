@@ -20,10 +20,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: var(--hero-bg-image);
     z-index: 1;
 }
 
@@ -37,28 +33,53 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: var(--hero-bg-image);
 }
 
 /* Top Text */
 .wp-block-asari-hero .hero-top-text {
-    font-family: var(--wp--preset--font-family--menage);
-    font-size: var(--wp--preset--font-size--h1);
+    font-family: var(--wp--preset--font-family--manege);
     font-weight: 300;
-    margin-bottom: var(--wp--preset--spacing--medium);
-    opacity: 0.9;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    animation: fadeInUp 0.8s ease-out 0.2s both;
+    height: 50%;
+    display: flex;
+    align-items: flex-end;
 }
 
-/* Bottom Text (Main Heading) */
+/* Top Text Alignment Variations */
+.wp-block-asari-hero[data-text-alignment="left"] .hero-top-text {
+    justify-content: flex-start;
+}
+
+.wp-block-asari-hero[data-text-alignment="center"] .hero-top-text {
+    justify-content: center;
+}
+
+.wp-block-asari-hero[data-text-alignment="right"] .hero-top-text {
+    justify-content: flex-end;
+}
+
+/* Bottom Text */
 .wp-block-asari-hero .hero-bottom-text {
     font-family: var(--wp--preset--font-family--cofo-gothic);
-    font-size: var(--wp--preset--font-size--h1);
     font-weight: 200;
     line-height: 1.1;
-    margin-top: var(--wp--preset--spacing--medium);
-    animation: fadeInUp 0.8s ease-out 0.4s both;
+    height: 50%;
+}
+
+/* Text Styles */
+.wp-block-asari-hero .hero-top-text span, .wp-block-asari-hero .hero-bottom-text span {
+    font-size: var(--wp--preset--font-size--h-1);
+    opacity: 0.9;
+    letter-spacing: 0.1em;
+    animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+/* Separator */
+.wp-block-asari-hero .hero-separator {
+    height: 1rem;
 }
 
 /* Alignment Variations */
@@ -127,12 +148,12 @@
     }
     
     .wp-block-asari-hero .hero-top-text {
-        font-size: var(--wp--preset--font-size--b3);
+        font-size: var(--wp--preset--font-size--b-3);
         margin-bottom: var(--wp--preset--spacing--small);
     }
     
     .wp-block-asari-hero .hero-bottom-text {
-        font-size: var(--wp--preset--font-size--h2);
+        font-size: var(--wp--preset--font-size--h-2);
         margin-top: var(--wp--preset--spacing--small);
     }
 }
@@ -143,7 +164,7 @@
     }
     
     .wp-block-asari-hero .hero-bottom-text {
-        font-size: var(--wp--preset--font-size--h3);
+        font-size: var(--wp--preset--font-size--h-3);
     }
     
     .wp-block-asari-hero {
@@ -162,4 +183,10 @@
     .wp-block-asari-hero .hero-overlay {
         display: none;
     }
+}
+
+
+/* temp test */
+body {
+    height: 4000px;
 }

@@ -68,22 +68,20 @@ if (!$top_text && !$bottom_text && !$is_preview) {
     <?php echo implode(' ', $data_attrs); ?>
     <?php if ($bg_alt): ?>aria-label="<?php echo $bg_alt; ?>"<?php endif; ?>
 >
-    
     <div class="hero-content h-full">
+
         <?php if ($top_text) : ?>
-            <div class="hero-top-text">
-                <span class="hero-top-text-inner font-menage">
+            <div class="hero-top-text bg-white">
+                <span class="hero-top-text-inner font-manege">
                     <?php echo wp_kses_post($top_text); ?>
                 </span>
             </div>
         <?php endif; ?>
-            
-        <?php if ($bg_url): ?>
-            <div class="hero-background" role="img" aria-hidden="true"></div>
-        <?php endif; ?>
+
+        <div class="hero-separator"></div>
         
         <?php if ($bottom_text) : ?>
-            <div class="hero-bottom-text">
+            <div class="hero-bottom-text bg-white">
                 <span class="hero-bottom-text-inner font-cofo">
                     <?php echo wp_kses_post($bottom_text); ?>
                 </span>

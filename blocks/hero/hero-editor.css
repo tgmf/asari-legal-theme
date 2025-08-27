@@ -39,7 +39,7 @@
     justify-content: center;
     text-align: center;
     font-family: var(--wp--preset--font-family--cofo-gothic);
-    font-size: var(--wp--preset--font-size--b3);
+    font-size: var(--wp--preset--font-size--b-3);
 }
 
 .wp-block-asari-hero.is-empty-placeholder p {
