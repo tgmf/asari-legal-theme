@@ -31,14 +31,14 @@
 /* ==========================================================================
    FONT SIZES (using theme tokens)
    ========================================================================== */
-.text-b5 { font-size: var(--wp--preset--font-size--b5); }
-.text-b4 { font-size: var(--wp--preset--font-size--b4); }
-.text-b3 { font-size: var(--wp--preset--font-size--b3); }
-.text-b2 { font-size: var(--wp--preset--font-size--b2); }
-.text-b1 { font-size: var(--wp--preset--font-size--b1); }
-.text-h3 { font-size: var(--wp--preset--font-size--h3); }
-.text-h2 { font-size: var(--wp--preset--font-size--h2); }
-.text-h1 { font-size: var(--wp--preset--font-size--h1); }
+.text-b5 { font-size: var(--wp--preset--font-size--b-5); }
+.text-b4 { font-size: var(--wp--preset--font-size--b-4); }
+.text-b3 { font-size: var(--wp--preset--font-size--b-3); }
+.text-b2 { font-size: var(--wp--preset--font-size--b-2); }
+.text-b1 { font-size: var(--wp--preset--font-size--b-1); }
+.text-h3 { font-size: var(--wp--preset--font-size--h-3); }
+.text-h2 { font-size: var(--wp--preset--font-size--h-2); }
+.text-h1 { font-size: var(--wp--preset--font-size--h-1); }
 
 /* ==========================================================================
    FONT FAMILIES (using theme tokens)
@@ -294,7 +294,7 @@
     .mobile\:text-left { text-align: left; }
     .mobile\:flex-column { flex-direction: column; }
     .mobile\:p-small { padding: var(--wp--preset--spacing--small); }
-    .mobile\:text-h3 { font-size: var(--wp--preset--font-size--h3); }
+    .mobile\:text-h3 { font-size: var(--wp--preset--font-size--h-3); }
 }
 
 @media (min-width: 768px) {
@@ -307,7 +307,7 @@
 @media (min-width: 1024px) {
     .desktop\:d-block { display: block; }
     .desktop\:d-flex { display: flex; }
-    .desktop\:text-h1 { font-size: var(--wp--preset--font-size--h1); }
+    .desktop\:text-h1 { font-size: var(--wp--preset--font-size--h-1); }
 }
 
 /* ==========================================================================
