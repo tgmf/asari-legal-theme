@@ -68,7 +68,7 @@ if (!$top_text && !$bottom_text && !$is_preview) {
     <?php echo implode(' ', $data_attrs); ?>
     <?php if ($bg_alt): ?>aria-label="<?php echo $bg_alt; ?>"<?php endif; ?>
 >
-    <div class="hero-content h-full">
+    <div class="hero-content">
 
         <?php if ($top_text) : ?>
             <div class="hero-top-text bg-white">
@@ -78,8 +78,8 @@ if (!$top_text && !$bottom_text && !$is_preview) {
             </div>
         <?php endif; ?>
 
-        <div class="hero-separator"></div>
-        
+        <div class="hero-middle-reveal"></div>
+
         <?php if ($bottom_text) : ?>
             <div class="hero-bottom-text bg-white">
                 <span class="hero-bottom-text-inner font-cofo">
