@@ -23,13 +23,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-image: var(--hero-bg-image);
-    top: var(--header-height, 128px);
-    height: calc(100vh - var(--header-height, 128px));
-}
-
-.admin-bar .wp-block-asari-hero .hero-content {
-    top: calc(var(--header-height, 128px) + 32px);
-    height: calc(100vh - var(--header-height, 128px) - 32px);
+    top: calc(var(--header-height, 128px) + var(--wp-admin--admin-bar--height, 0px));
+    height: calc(100vh - var(--header-height, 128px) - var(--wp-admin--admin-bar--height, 0px));
 }
 
 /* Top Text */

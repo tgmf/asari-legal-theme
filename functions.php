@@ -69,6 +69,15 @@ function asari_legal_scripts() {
         array('asari-legal-style'), // Depend on main styles
         wp_get_theme()->get('Version')
     );
+    
+    // Header height calculator - load early
+    wp_enqueue_script(
+        'asari-legal-header-height',
+        get_template_directory_uri() . '/assets/js/header-height.js',
+        array(),
+        wp_get_theme()->get('Version'),
+        false // Load in head for early execution
+    );
 }
 add_action('wp_enqueue_scripts', 'asari_legal_scripts');
 
@@ -91,6 +100,7 @@ function asari_legal_register_blocks() {
     // Register blocks using block.json files
     $block_dirs = array(
         'hero',
+        'image-with-options',
         // Add other block directories here as you create them
         // 'employee-grid',
         // 'practice-showcase',
@@ -159,3 +169,12 @@ function asari_legal_mime_types( $mimes ) {
     return $mimes;
 }
 add_filter( 'upload_mimes', 'asari_legal_mime_types' );
+
+/**
+ * Set initial header height CSS custom property (fallback)
+ */
+function asari_legal_initial_header_height() {
+    echo '<style>:root { --header-height: 128px; }</style>';
+}
+add_action('wp_head', 'asari_legal_initial_header_height', 1);
+add_action('admin_head', 'asari_legal_initial_header_height', 1);
