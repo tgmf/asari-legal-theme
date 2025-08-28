@@ -31,7 +31,7 @@
         
         heroBlock.style.setProperty('--hero-text-alignment', textAlignment);
         heroBlock.classList.add('hero-loaded');
-        
+        console.log(document.body.classList.contains('block-editor-iframe__body'));
         setupScrollAnimation(heroBlock, middleReveal);
     }
 
@@ -39,6 +39,12 @@
      * Setup scroll animation
      */
     function setupScrollAnimation(heroBlock, middleReveal) {
+        // Check if we're in editor environment
+        if (document.body.classList.contains('block-editor-iframe__body')) {
+            // In editor - don't run scroll animations
+            return;
+        }
+        
         // Animation constants
         const MIN_HEIGHT = 1;    // 1rem starting height
         const MAX_HEIGHT = 17;   // 17rem final height
