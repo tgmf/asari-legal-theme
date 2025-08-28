@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schemas.wp.org/wp/6.8/block.json",
+    "apiVersion": 3,
+    "name": "asari/image-with-options",
+    "title": "Image with Options",
+    "description": "A block for displaying an image with customizable options.",
+    "category": "asari-blocks",
+    "icon": "columns",
+    "keywords": ["split", "content", "accordion", "image", "layout"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "image-with-options.php"
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "title": "Asari Legal.",
+                "subtitle": "Объединяем стратегию, экспертизу и вдохновение.",
+                "button_text": "О нас",
+                "button_link": "#about",
+                "description": "Знаете ли вы, что значит Asari?",
+                "accordion_title": "Варианты ответа",
+                "accordion_items": [
+                    {
+                        "tab_title": "Шедевр",
+                        "tab_content": "Asari означает высшее мастерство и совершенство в японской культуре."
+                    },
+                    {
+                        "tab_title": "Свет", 
+                        "tab_content": "Символ просветления и ясности мышления."
+                    }
+                ],
+                "image": {
+                    "url": "https://via.placeholder.com/800x600/B8CBE5/FFFFFF?text=Content+Image"
+                }
+            }
+        }
+    },
+    "textdomain": "asari-legal-theme",
+    "script": "file:./image-with-options.js",
+    "editorStyle": "file:./image-with-options-editor.css",
+    "style": "file:./image-with-options.css"
+}

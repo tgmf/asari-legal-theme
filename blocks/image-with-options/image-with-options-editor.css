@@ -1,0 +1,202 @@
+/**
+ * Split Content Block Editor Styles
+ * Styles specific to the block editor interface
+ */
+
+/* Editor-specific overrides */
+.wp-block-asari-split-content {
+    /* Ensure proper display in editor */
+    position: relative !important;
+    min-height: 400px;
+    color: black;
+}
+
+/* Editor preview mode adjustments */
+.block-editor-block-preview__content .wp-block-asari-split-content {
+    min-height: 300px;
+}
+
+.block-editor-block-preview__content .split-content-container {
+    height: 300px;
+}
+
+/* Block appender styling */
+.wp-block-asari-split-content .block-list-appender {
+    position: relative;
+    z-index: 4;
+}
+
+/* Selected state */
+.wp-block.is-selected .wp-block-asari-split-content {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: -2px;
+}
+
+/* Editor placeholder */
+.wp-block-asari-split-content.is-empty-placeholder {
+    background: var(--wp--preset--color--asari-soft-gray);
+    color: var(--wp--preset--color--asari-gray);
+    border: 2px dashed var(--wp--preset--color--asari-gray);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--wp--preset--font-family--cofo-gothic);
+    font-size: var(--wp--preset--font-size--b-3);
+}
+
+.wp-block-asari-split-content.is-empty-placeholder p {
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Block controls visibility */
+.wp-block-asari-split-content:hover .block-editor-block-list__block-edit::before {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: -2px;
+}
+
+/* Editor-specific content adjustments */
+.block-editor-writing-flow .wp-block-asari-split-content .split-content-container {
+    pointer-events: none; /* Prevent selection conflicts */
+}
+
+.block-editor-writing-flow .wp-block-asari-split-content.is-selected .split-content-container {
+    pointer-events: auto;
+}
+
+/* Prevent layout issues in editor */
+.block-editor-writing-flow .split-content-container {
+    display: flex;
+    min-height: 300px;
+}
+
+.block-editor-writing-flow .split-content-left,
+.block-editor-writing-flow .split-content-right {
+    flex: 1;
+}
+
+/* Preview mode specific styles */
+.acf-block-preview .wp-block-asari-split-content {
+    animation: none; /* Disable animations in preview */
+}
+
+.acf-block-preview .split-content-title,
+.acf-block-preview .split-content-subtitle,
+.acf-block-preview .split-content-button,
+.acf-block-preview .split-content-description,
+.acf-block-preview .split-content-accordion {
+    animation: none;
+}
+
+/* Editor accordion adjustments */
+.block-editor-writing-flow .accordion-tab {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.block-editor-writing-flow .accordion-content {
+    min-height: 40px;
+}
+
+/* Editor image handling */
+.block-editor-writing-flow .split-content-image img {
+    animation: none;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+/* Responsive editor preview */
+@media (max-width: 782px) {
+    .wp-block-asari-split-content {
+        min-height: 400px;
+    }
+    
+    .block-editor-writing-flow .split-content-container {
+        flex-direction: column;
+        min-height: 400px;
+    }
+    
+    .block-editor-writing-flow .split-content-left {
+        min-height: 200px;
+    }
+    
+    .block-editor-writing-flow .split-content-right {
+        min-height: 200px;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .wp-block-asari-split-content.is-empty-placeholder {
+        border-width: 3px;
+        background: transparent;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wp-block-asari-split-content,
+    .wp-block-asari-split-content .split-content-title,
+    .wp-block-asari-split-content .split-content-subtitle,
+    .wp-block-asari-split-content .split-content-button,
+    .wp-block-asari-split-content .split-content-description,
+    .wp-block-asari-split-content .split-content-accordion {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Focus states for accessibility */
+.wp-block-asari-split-content:focus-within {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: 2px;
+}
+
+/* Block toolbar positioning */
+.wp-block.is-selected .wp-block-asari-split-content .block-editor-block-contextual-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Editor specific accordion states */
+.block-editor-writing-flow .accordion-panel {
+    position: relative;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+.block-editor-writing-flow .accordion-panel:not(.active) {
+    display: none;
+}
+
+/* Editor button styling */
+.block-editor-writing-flow .btn-asari {
+    pointer-events: none;
+    position: relative;
+}
+
+.block-editor-writing-flow .btn-asari::after {
+    content: 'Button Preview';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 123, 186, 0.1);
+    border: 1px dashed var(--wp-admin-theme-color, #007cba);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--wp-admin-theme-color, #007cba);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.block-editor-writing-flow .wp-block.is-selected .btn-asari::after {
+    opacity: 1;
+}
