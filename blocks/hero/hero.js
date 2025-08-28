@@ -10,10 +10,7 @@
      */
     function initHeroBlocks() {
         const heroBlocks = document.querySelectorAll('.wp-block-asari-hero');
-        console.log('Initializing hero blocks:', heroBlocks);
-        heroBlocks.forEach(function(heroBlock) {
-            setupHeroBlock(heroBlock);
-        });
+        heroBlocks.forEach(setupHeroBlock);
     }
     
     /**
@@ -23,97 +20,131 @@
         const bgUrl = heroBlock.getAttribute('data-bg-url');
         const textAlignment = heroBlock.getAttribute('data-text-alignment') || 'center';
         const middleReveal = heroBlock.querySelector('.hero-middle-reveal');
-        console.log(bgUrl, textAlignment);
         
         // Set CSS custom properties
         if (bgUrl) {
             heroBlock.style.setProperty('--hero-bg-image', `url('${bgUrl}')`);
-            preloadBackgroundImage(bgUrl, function() {
+            preloadBackgroundImage(bgUrl, () => {
                 heroBlock.classList.add('hero-bg-loaded');
             });
         }
         
         heroBlock.style.setProperty('--hero-text-alignment', textAlignment);
-        
-        // Add loaded class for animations
         heroBlock.classList.add('hero-loaded');
         
-
-        if (middleReveal) {
-            setupScrollReveal(heroBlock, middleReveal);
-        }
-        
-        // Add intersection observer for scroll animations (optional)
-        if ('IntersectionObserver' in window) {
-            setupScrollAnimation(heroBlock);
-        }
+        setupScrollAnimation(heroBlock, middleReveal);
     }
 
     /**
-     * Setup scroll reveal animation for hero block
+     * Setup scroll animation
      */
-    function setupScrollReveal(heroBlock, middleReveal) {
-        // Animation parameters
-        const minHeight = 1; // 1rem starting height
-        const maxHeight = 17; // 17rem final height
+    function setupScrollAnimation(heroBlock, middleReveal) {
+        // Animation constants
+        const MIN_HEIGHT = 1;    // 1rem starting height
+        const MAX_HEIGHT = 17;   // 17rem final height
+        const MIN_OPACITY = 0.4; // Final opacity
+        const MIN_SCALE = 0.85;   // Final text scale
         
-        function getTriggerHeight() {
+        // Cache DOM elements and calculations
+        const textElements = heroBlock.querySelectorAll('.hero-top-text span, .hero-bottom-text span');
+        
+        function getAnimationConfig() {
             const heroContent = heroBlock.querySelector('.hero-content');
-            const sectionHeight = heroBlock.offsetHeight;
-            const contentHeight = heroContent.offsetHeight;
-            return sectionHeight - contentHeight;
-        }
-        
-        function updateReveal() {
-            const scrollY = window.scrollY;
-            const heroTop = heroBlock.offsetTop;
             const headerHeight = parseInt(
                 getComputedStyle(document.documentElement)
                     .getPropertyValue('--header-height') || '128'
             );
-            const triggerHeight = getTriggerHeight();
             
-            // Calculate scroll position relative to when animation should start
-            const animationTriggerPoint = heroTop - headerHeight;
-            const scrollFromTrigger = scrollY - animationTriggerPoint;
+            return {
+                heroTop: heroBlock.offsetTop,
+                headerHeight,
+                phase1Duration: heroBlock.offsetHeight - heroContent.offsetHeight,
+                phase2Duration: window.innerHeight - headerHeight,
+                animationStart: heroBlock.offsetTop - headerHeight
+            };
+        }
+
+        /**
+         * Initialize state for page loads beyond animation range
+         */
+        function initializeState() {
+            const config = getAnimationConfig();
+            const scrollFromStart = window.scrollY - config.animationStart;
+            const totalDuration = config.phase1Duration + config.phase2Duration;
             
-            if (scrollFromTrigger >= 0 && scrollFromTrigger <= triggerHeight) {
-                // Within animation range - directly calculate height
-                const progress = Math.min(scrollFromTrigger / triggerHeight, 1);
+            // Set final state if loaded beyond animation range
+            if (scrollFromStart > totalDuration) {
+                heroBlock.style.opacity = MIN_OPACITY;
+                textElements.forEach(el => el.style.transform = `scale(${MIN_SCALE})`);
+                middleReveal.style.height = `${MIN_HEIGHT}rem`;
+            } else updateAnimation();
+        }
+        
+        /**
+         * Update animation based on scroll position
+         */
+        function updateAnimation() {
+            const config = getAnimationConfig();
+            const scrollFromStart = window.scrollY - config.animationStart;
+            const totalDuration = config.phase1Duration + config.phase2Duration;
+            
+            // Early return if outside animation range
+            if (scrollFromStart <= 0 || scrollFromStart > totalDuration) {
+                return;
+            }
+            
+            if (scrollFromStart <= config.phase1Duration) {
+                // Phase 1: Expansion with easing
+                const progress = scrollFromStart / config.phase1Duration;
                 const easedProgress = easeInQuad(progress);
-                const currentHeight = minHeight + (easedProgress * (maxHeight - minHeight));
+                const currentHeight = MIN_HEIGHT + (easedProgress * (MAX_HEIGHT - MIN_HEIGHT));
                 
                 middleReveal.style.height = `${currentHeight}rem`;
-            } else if (scrollFromTrigger < 0) {
-                // Before animation start
-                middleReveal.style.height = `${minHeight}rem`;
+                
             } else {
-                // After animation range
-                middleReveal.style.height = `${maxHeight}rem`;
+                // Phase 2: Contraction with fade effects (linear)
+                const progress = (scrollFromStart - config.phase1Duration) / config.phase2Duration;
+                const easedProgress = easeOutQuad(progress);
+                // Height: 17rem → 1rem
+                const currentHeight = MAX_HEIGHT - (easedProgress * (MAX_HEIGHT - MIN_HEIGHT));
+                middleReveal.style.height = `${currentHeight}rem`;
+                
+                // Opacity: 1 → 0.4
+                const currentOpacity = Math.max(MIN_OPACITY, 1 - (easedProgress * (1 - MIN_OPACITY)));
+                heroBlock.style.opacity = currentOpacity;
+                
+                // Text scale: 1 → 0.9
+                const currentScale = Math.max(MIN_SCALE, 1 - (easedProgress * (1 - MIN_SCALE)));
+                textElements.forEach(el => el.style.transform = `scale(${currentScale})`);
             }
         }
         
-        // Throttled scroll listener
-        let ticking = false;
+        // Initialize state and run initial update
+        initializeState();
+        
+        // Setup throttled scroll listener
+        let isScrolling = false;
         
         function onScroll() {
-            if (!ticking) {
+            if (!isScrolling) {
                 requestAnimationFrame(() => {
-                    updateReveal();
-                    ticking = false;
+                    updateAnimation();
+                    isScrolling = false;
                 });
-                ticking = true;
+                isScrolling = true;
             }
         }
         
         window.addEventListener('scroll', onScroll, { passive: true });
         
+        // Store cleanup function
         heroBlock._scrollCleanup = () => {
             window.removeEventListener('scroll', onScroll);
         };
-        
-        // Initial call - handles page reload at any position
-        updateReveal();
+    }
+
+    function easeOutQuad(t) {
+        return t * (2 - t);
     }
 
     function easeOutQuart(t) {
@@ -125,44 +156,35 @@
     }
     
     /**
-     * Preload background image
+     * Preload background image with callback
      */
     function preloadBackgroundImage(url, callback) {
         const img = new Image();
-        img.onload = callback;
-        img.onerror = callback; // Still call callback on error
+        img.onload = img.onerror = callback;
         img.src = url;
     }
     
     /**
-     * Setup scroll-based animations
+     * Handle window resize with debouncing
      */
-    function setupScrollAnimation(heroBlock) {
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('hero-in-view');
-                } else {
-                    entry.target.classList.remove('hero-in-view');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '50px'
+    function handleResize() {
+        const heroBlocks = document.querySelectorAll('.wp-block-asari-hero');
+        heroBlocks.forEach(heroBlock => {
+            // Force recalculation by triggering reflow
+            heroBlock.style.minHeight = heroBlock.style.minHeight;
         });
-        
-        observer.observe(heroBlock);
     }
     
     /**
-     * Handle window resize
+     * Cleanup scroll listeners (for dynamic content)
      */
-    function handleResize() {
-        // Recalculate hero heights if needed
+    function cleanup() {
         const heroBlocks = document.querySelectorAll('.wp-block-asari-hero');
-        heroBlocks.forEach(function(heroBlock) {
-            // Trigger reflow for percentage-based heights
-            heroBlock.style.minHeight = heroBlock.style.minHeight;
+        heroBlocks.forEach(heroBlock => {
+            if (heroBlock._scrollCleanup) {
+                heroBlock._scrollCleanup();
+                delete heroBlock._scrollCleanup;
+            }
         });
     }
     
@@ -170,17 +192,16 @@
      * Initialize everything
      */
     function init() {
-        // Initial setup
         initHeroBlocks();
         
-        // Handle resize
+        // Debounced resize handler
         let resizeTimeout;
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(handleResize, 250);
         });
         
-        // Re-initialize on dynamic content loading (for AJAX-loaded content)
+        // Re-initialize on dynamic content loading
         if (typeof window.wp !== 'undefined' && window.wp.hooks) {
             window.wp.hooks.addAction('asari.contentLoaded', 'asari/hero', initHeroBlocks);
         }
@@ -193,10 +214,11 @@
         init();
     }
     
-    // Expose for potential external use
+    // Expose API for external use
     window.asariHero = {
         init: initHeroBlocks,
-        setupBlock: setupHeroBlock
+        setupBlock: setupHeroBlock,
+        cleanup: cleanup
     };
     
 })();
