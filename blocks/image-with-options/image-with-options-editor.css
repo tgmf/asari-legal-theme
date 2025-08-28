@@ -4,7 +4,7 @@
  */
 
 /* Editor-specific overrides */
-.wp-block-asari-split-content {
+.wp-block-asari-image-with-options {
     /* Ensure proper display in editor */
     position: relative !important;
     min-height: 400px;
@@ -12,28 +12,28 @@
 }
 
 /* Editor preview mode adjustments */
-.block-editor-block-preview__content .wp-block-asari-split-content {
+.block-editor-block-preview__content .wp-block-asari-image-with-options {
     min-height: 300px;
 }
 
-.block-editor-block-preview__content .split-content-container {
+.block-editor-block-preview__content .image-with-options-container {
     height: 300px;
 }
 
 /* Block appender styling */
-.wp-block-asari-split-content .block-list-appender {
+.wp-block-asari-image-with-options .block-list-appender {
     position: relative;
     z-index: 4;
 }
 
 /* Selected state */
-.wp-block.is-selected .wp-block-asari-split-content {
+.wp-block.is-selected .wp-block-asari-image-with-options {
     outline: 2px solid var(--wp-admin-theme-color, #007cba);
     outline-offset: -2px;
 }
 
 /* Editor placeholder */
-.wp-block-asari-split-content.is-empty-placeholder {
+.wp-block-asari-image-with-options.is-empty-placeholder {
     background: var(--wp--preset--color--asari-soft-gray);
     color: var(--wp--preset--color--asari-gray);
     border: 2px dashed var(--wp--preset--color--asari-gray);
@@ -46,47 +46,47 @@
     font-size: var(--wp--preset--font-size--b-3);
 }
 
-.wp-block-asari-split-content.is-empty-placeholder p {
+.wp-block-asari-image-with-options.is-empty-placeholder p {
     margin: 0;
     opacity: 0.7;
 }
 
 /* Block controls visibility */
-.wp-block-asari-split-content:hover .block-editor-block-list__block-edit::before {
+.wp-block-asari-image-with-options:hover .block-editor-block-list__block-edit::before {
     outline: 2px solid var(--wp-admin-theme-color, #007cba);
     outline-offset: -2px;
 }
 
 /* Editor-specific content adjustments */
-.block-editor-writing-flow .wp-block-asari-split-content .split-content-container {
+.block-editor-writing-flow .wp-block-asari-image-with-options .image-with-options-container {
     pointer-events: none; /* Prevent selection conflicts */
 }
 
-.block-editor-writing-flow .wp-block-asari-split-content.is-selected .split-content-container {
+.block-editor-writing-flow .wp-block-asari-image-with-options.is-selected .image-with-options-container {
     pointer-events: auto;
 }
 
 /* Prevent layout issues in editor */
-.block-editor-writing-flow .split-content-container {
+.block-editor-writing-flow .image-with-options-container {
     display: flex;
     min-height: 300px;
 }
 
-.block-editor-writing-flow .split-content-left,
-.block-editor-writing-flow .split-content-right {
+.block-editor-writing-flow .image-with-options-left,
+.block-editor-writing-flow .image-with-options-right {
     flex: 1;
 }
 
 /* Preview mode specific styles */
-.acf-block-preview .wp-block-asari-split-content {
+.acf-block-preview .wp-block-asari-image-with-options {
     animation: none; /* Disable animations in preview */
 }
 
-.acf-block-preview .split-content-title,
-.acf-block-preview .split-content-subtitle,
-.acf-block-preview .split-content-button,
-.acf-block-preview .split-content-description,
-.acf-block-preview .split-content-accordion {
+.acf-block-preview .image-with-options-title,
+.acf-block-preview .image-with-options-subtitle,
+.acf-block-preview .image-with-options-button,
+.acf-block-preview .image-with-options-description,
+.acf-block-preview .image-with-options-accordion {
     animation: none;
 }
 
@@ -101,7 +101,7 @@
 }
 
 /* Editor image handling */
-.block-editor-writing-flow .split-content-image img {
+.block-editor-writing-flow .image-with-options-image img {
     animation: none;
     max-height: 300px;
     object-fit: cover;
@@ -109,27 +109,27 @@
 
 /* Responsive editor preview */
 @media (max-width: 782px) {
-    .wp-block-asari-split-content {
+    .wp-block-asari-image-with-options {
         min-height: 400px;
     }
     
-    .block-editor-writing-flow .split-content-container {
+    .block-editor-writing-flow .image-with-options-container {
         flex-direction: column;
         min-height: 400px;
     }
     
-    .block-editor-writing-flow .split-content-left {
+    .block-editor-writing-flow .image-with-options-left {
         min-height: 200px;
     }
     
-    .block-editor-writing-flow .split-content-right {
+    .block-editor-writing-flow .image-with-options-right {
         min-height: 200px;
     }
 }
 
 /* High contrast mode */
 @media (prefers-contrast: high) {
-    .wp-block-asari-split-content.is-empty-placeholder {
+    .wp-block-asari-image-with-options.is-empty-placeholder {
         border-width: 3px;
         background: transparent;
     }
@@ -137,25 +137,25 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    .wp-block-asari-split-content,
-    .wp-block-asari-split-content .split-content-title,
-    .wp-block-asari-split-content .split-content-subtitle,
-    .wp-block-asari-split-content .split-content-button,
-    .wp-block-asari-split-content .split-content-description,
-    .wp-block-asari-split-content .split-content-accordion {
+    .wp-block-asari-image-with-options,
+    .wp-block-asari-image-with-options .image-with-options-title,
+    .wp-block-asari-image-with-options .image-with-options-subtitle,
+    .wp-block-asari-image-with-options .image-with-options-button,
+    .wp-block-asari-image-with-options .image-with-options-description,
+    .wp-block-asari-image-with-options .image-with-options-accordion {
         animation: none;
         transition: none;
     }
 }
 
 /* Focus states for accessibility */
-.wp-block-asari-split-content:focus-within {
+.wp-block-asari-image-with-options:focus-within {
     outline: 2px solid var(--wp-admin-theme-color, #007cba);
     outline-offset: 2px;
 }
 
 /* Block toolbar positioning */
-.wp-block.is-selected .wp-block-asari-split-content .block-editor-block-contextual-toolbar {
+.wp-block.is-selected .wp-block-asari-image-with-options .block-editor-block-contextual-toolbar {
     position: sticky;
     top: 0;
     z-index: 10;

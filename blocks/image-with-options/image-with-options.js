@@ -9,7 +9,7 @@
      * Initialize split content blocks when DOM is ready
      */
     function initSplitContentBlocks() {
-        const splitContentBlocks = document.querySelectorAll('.wp-block-asari-split-content');
+        const splitContentBlocks = document.querySelectorAll('.wp-block-asari-image-with-options');
         splitContentBlocks.forEach(setupSplitContentBlock);
     }
     
@@ -17,13 +17,13 @@
      * Setup individual split content block
      */
     function setupSplitContentBlock(block) {
-        const accordion = block.querySelector('.split-content-accordion');
+        const accordion = block.querySelector('.image-with-options-accordion');
         if (accordion) {
             setupAccordion(accordion);
         }
         
         // Add loaded class for animations
-        block.classList.add('split-content-loaded');
+        block.classList.add('image-with-options-loaded');
     }
     
     /**
@@ -131,7 +131,7 @@
      * Cleanup function
      */
     function cleanup() {
-        const splitContentBlocks = document.querySelectorAll('.wp-block-asari-split-content');
+        const splitContentBlocks = document.querySelectorAll('.wp-block-asari-image-with-options');
         splitContentBlocks.forEach(block => {
             const tabs = block.querySelectorAll('.accordion-tab');
             tabs.forEach(tab => {
@@ -156,7 +156,7 @@
         
         // Re-initialize on dynamic content loading
         if (typeof window.wp !== 'undefined' && window.wp.hooks) {
-            window.wp.hooks.addAction('asari.contentLoaded', 'asari/split-content', initSplitContentBlocks);
+            window.wp.hooks.addAction('asari.contentLoaded', 'asari/image-with-options', initSplitContentBlocks);
         }
         
         // Initial resize calculation

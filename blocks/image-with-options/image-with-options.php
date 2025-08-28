@@ -11,13 +11,13 @@
  */
 
 // Create id attribute allowing for custom "anchor" value
-$id = 'split-content-' . $block['id'];
+$id = 'image-with-options-' . $block['id'];
 if (!empty($block['anchor'])) {
     $id = $block['anchor'];
 }
 
 // Create class attribute allowing for custom "className" and "align" values
-$className = 'wp-block-asari-split-content';
+$className = 'wp-block-asari-image-with-options';
 if (!empty($block['className'])) {
     $className .= ' ' . $block['className'];
 }
@@ -64,22 +64,22 @@ if (!$title && !$subtitle && !$description && !$is_preview) {
     class="<?php echo esc_attr($className); ?>"
     data-accordion-id="<?php echo esc_attr($accordion_id); ?>"
 >
-    <div class="split-content-container">
+    <div class="image-with-options-container">
         
         <!-- Left Content -->
-        <div class="split-content-left">
-            <div class="split-content-inner">
+        <div class="image-with-options-left">
+            <div class="image-with-options-inner">
                 
                 <?php if ($title || $subtitle) : ?>
-                    <div class="split-content-header">
+                    <div class="image-with-options-header">
                         <?php if ($title) : ?>
-                            <h1 class="split-content-title font-cofo text-h1">
+                            <h1 class="image-with-options-title font-cofo text-h1">
                                 <?php echo wp_kses_post($title); ?>
                             </h1>
                         <?php endif; ?>
                         
                         <?php if ($subtitle) : ?>
-                            <p class="split-content-subtitle font-cofo text-h3 text-gray">
+                            <p class="image-with-options-subtitle font-cofo text-h3 text-gray">
                                 <?php echo wp_kses_post($subtitle); ?>
                             </p>
                         <?php endif; ?>
@@ -87,7 +87,7 @@ if (!$title && !$subtitle && !$description && !$is_preview) {
                 <?php endif; ?>
 
                 <?php if ($button_text && $button_link) : ?>
-                    <div class="split-content-button">
+                    <div class="image-with-options-button">
                         <a href="<?php echo esc_url($button_link); ?>" 
                            class="btn-asari">
                             <?php echo esc_html($button_text); ?>
@@ -97,13 +97,13 @@ if (!$title && !$subtitle && !$description && !$is_preview) {
                 <?php endif; ?>
 
                 <?php if ($description) : ?>
-                    <div class="split-content-description">
+                    <div class="image-with-options-description">
                         <p class="text-b1"><?php echo wp_kses_post($description); ?></p>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($accordion_items && is_array($accordion_items)) : ?>
-                    <div class="split-content-accordion" id="<?php echo esc_attr($accordion_id); ?>">
+                    <div class="image-with-options-accordion" id="<?php echo esc_attr($accordion_id); ?>">
                         <div class="accordion-header">
                             <p class="accordion-label text-b2">Варианты ответа</p>
                         </div>
@@ -149,15 +149,15 @@ if (!$title && !$subtitle && !$description && !$is_preview) {
         </div>
 
         <!-- Right Image -->
-        <div class="split-content-right">
+        <div class="image-with-options-right">
             <?php if ($img_url) : ?>
-                <div class="split-content-image">
+                <div class="image-with-options-image">
                     <img src="<?php echo $img_url; ?>" 
                          alt="<?php echo $img_alt; ?>"
                          loading="lazy">
                 </div>
             <?php else : ?>
-                <div class="split-content-image-placeholder">
+                <div class="image-with-options-image-placeholder">
                     <div class="placeholder-content">
                         <p>Image Placeholder</p>
                     </div>
