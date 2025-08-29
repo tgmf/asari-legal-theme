@@ -70,6 +70,14 @@ function asari_legal_scripts() {
         wp_get_theme()->get('Version')
     );
     
+    // UI classes - load after main styles
+    wp_enqueue_style(
+        'asari-legal-components',
+        get_template_directory_uri() . '/assets/css/components.css',
+        array('asari-legal-style'), // Depend on main styles
+        wp_get_theme()->get('Version')
+    );
+    
     // Header height calculator - load early
     wp_enqueue_script(
         'asari-legal-header-height',

@@ -1,0 +1,182 @@
+/**
+ * Asari Button Component
+ * Based on Figma specifications with relative units
+ */
+
+.asari-btn {
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem; /* 10px */
+    
+    /* Sizing - Default (Medium) */
+    padding: 0.625rem 0.875rem; /* 10px 14px */
+    width: auto; /* Let content determine width */
+    min-width: fit-content;
+    
+    /* Styling */
+    background-color: var(--wp--preset--color--asari-white);
+    border: 1px solid var(--wp--preset--color--asari-warm-gray);
+    border-radius: 1.875rem; /* 30px */
+    
+    /* Typography */
+    font-family: var(--wp--preset--font-family--cofo-gothic);
+    font-weight: 200;
+    font-size: 1.375rem; /* 22px */
+    line-height: 1; /* 100% */
+    letter-spacing: 0;
+    color: var(--wp--preset--color--asari-black);
+    text-decoration: none;
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    /* States */
+    opacity: 1;
+}
+
+/* Hover State */
+.asari-btn:hover {
+    background-color: var(--wp--preset--color--asari-soft-gray);
+    text-decoration: none;
+    color: var(--wp--preset--color--asari-black);
+}
+
+/* Focus State for Accessibility */
+.asari-btn:focus {
+    outline: 2px solid var(--wp--preset--color--asari-gold);
+    outline-offset: 2px;
+}
+
+/* Active State */
+.asari-btn:active {
+    transform: translateY(1px);
+}
+
+/* Icon Styling */
+.asari-btn .btn-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    color: var(--wp--preset--color--asari-gold);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+/* SVG Icon Styling */
+.asari-btn .btn-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor; /* For lines/strokes */
+    fill: transparent; /* Default fill transparent */
+    transition: all 0.3s ease;
+}
+
+/* Icon Hover State */
+.asari-btn:hover .btn-icon {
+    color: var(--wp--preset--color--asari-white);
+}
+
+/* SVG Hover State */
+.asari-btn:hover .btn-icon svg {
+    stroke: var(--wp--preset--color--asari-white);
+    fill: var(--wp--preset--color--asari-gold); /* Background fill on hover */
+}
+
+/* Small Size Variant */
+.asari-btn.asari-btn--small {
+    font-size: 1rem; /* 16px */
+    padding: 0.5rem 0.875rem; /* 8px 14px */
+}
+
+.asari-btn.asari-btn--small .btn-icon {
+    width: 1rem; /* 16px */
+    height: 1rem; /* 16px */
+    font-size: 0.875rem;
+}
+
+/* Disabled State */
+.asari-btn:disabled,
+.asari-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Loading State (Optional) */
+.asari-btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.asari-btn.loading::after {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--wp--preset--color--asari-gray);
+    border-top: 2px solid var(--wp--preset--color--asari-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Button as actual button element */
+button.asari-btn {
+    border: 1px solid var(--wp--preset--color--asari-warm-gray);
+    background-color: var(--wp--preset--color--asari-white);
+}
+
+button.asari-btn:hover {
+    background-color: var(--wp--preset--color--asari-soft-gray);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .asari-btn {
+        font-size: 1.25rem; /* 20px on mobile */
+        padding: 0.5rem 0.75rem; /* Slightly smaller padding */
+    }
+    
+    .asari-btn.asari-btn--small {
+        font-size: 0.875rem; /* 14px on mobile */
+    }
+}
+
+/* Print Styles */
+@media print {
+    .asari-btn {
+        background: transparent !important;
+        color: var(--wp--preset--color--asari-black) !important;
+        border: 1px solid var(--wp--preset--color--asari-black) !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .asari-btn {
+        border-width: 2px;
+    }
+    
+    .asari-btn:focus {
+        outline-width: 3px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .asari-btn,
+    .asari-btn .btn-icon,
+    .asari-btn.loading::after {
+        transition: none;
+        animation: none;
+    }
+}

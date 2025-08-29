@@ -16,6 +16,11 @@
 			},
 			"spacingSizes": [
 				{
+					"size": "0.25rem",
+					"slug": "x-small",
+					"name": "Extra Small"
+				},
+				{
 					"size": "0.5rem",
 					"slug": "small",
 					"name": "Small"
@@ -34,6 +39,11 @@
 					"size": "2rem",
 					"slug": "x-large",
 					"name": "Extra Large"
+				},
+				{
+					"size": "2.5rem",
+					"slug": "2-x-large",
+					"name": "Even larger"
 				}
 			]
 		},
