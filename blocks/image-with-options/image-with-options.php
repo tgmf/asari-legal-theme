@@ -31,6 +31,7 @@ $subtitle = get_field('subtitle');
 $button_text = get_field('button_text');
 $button_link = get_field('button_link');
 $description = get_field('description');
+$accordion_title = get_field('accordion_title') ?: 'Options';
 $accordion_items = get_field('accordion_items');
 $image = get_field('image');
 
@@ -67,19 +68,19 @@ if (!$title && !$subtitle && !$description && !$is_preview) {
     <div class="image-with-options-container">
         
         <!-- Left Content -->
-        <div class="image-with-options-left">
-            <div class="image-with-options-inner">
-                
+        <div class="image-with-options-left px-x-large h-full d-flex flex-1">
+            <div class="image-with-options-inner w-full d-flex flex-column">
+
                 <?php if ($title || $subtitle) : ?>
-                    <div class="image-with-options-header">
+                    <div class="image-with-options-header mb-2x-large">
                         <?php if ($title) : ?>
-                            <h1 class="image-with-options-title font-cofo text-h1">
+                            <h1 class="image-with-options-title font-manege text-h2 mt-0">
                                 <?php echo wp_kses_post($title); ?>
                             </h1>
                         <?php endif; ?>
                         
                         <?php if ($subtitle) : ?>
-                            <p class="image-with-options-subtitle font-cofo text-h3 text-gray">
+                            <p class="image-with-options-subtitle font-cofo text-h2">
                                 <?php echo wp_kses_post($subtitle); ?>
                             </p>
                         <?php endif; ?>
@@ -88,39 +89,45 @@ if (!$title && !$subtitle && !$description && !$is_preview) {
 
                 <?php if ($button_text && $button_link) : ?>
                     <div class="image-with-options-button">
-                        <a href="<?php echo esc_url($button_link); ?>" 
-                           class="btn-asari">
+                        <a href="<?php echo esc_url($button_link['url']); ?>" 
+                        class="asari-btn"
+                        <?php if ($button_link['target']) echo 'target="' . esc_attr($button_link['target']) . '"'; ?>>
                             <?php echo esc_html($button_text); ?>
-                            <span class="btn-icon text-gold">→</span>
+                            <span class="btn-icon text-gold">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="10" cy="10" r="9.5" stroke="currentColor"/>
+                                    <path d="M13.9863 9.70581L8.91895 14.7732L8.21191 14.0662L12.5723 9.70581L8.21191 5.34546L8.91895 4.63843L13.9863 9.70581Z" fill="currentColor"/>
+                                </svg>
+                            </span>
                         </a>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($description) : ?>
-                    <div class="image-with-options-description">
-                        <p class="text-b1"><?php echo wp_kses_post($description); ?></p>
+                    <div class="image-with-options-description mt-auto mb-0">
+                        <p class="text-h3 mt-0 mb-large line-height-snug"><?php echo wp_kses_post($description); ?></p>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($accordion_items && is_array($accordion_items)) : ?>
-                    <div class="image-with-options-accordion" id="<?php echo esc_attr($accordion_id); ?>">
+                    <div class="image-with-options-accordion rounded-lg p-large" id="<?php echo esc_attr($accordion_id); ?>">
                         <div class="accordion-header">
-                            <p class="accordion-label text-b2">Варианты ответа</p>
+                            <p class="text-h3 mt-0 line-height-snug"><?php echo esc_html($accordion_title); ?></p>
                         </div>
                         
                         <div class="accordion-tabs">
                             <?php foreach ($accordion_items as $index => $item) : 
                                 if (!$item || !isset($item['tab_title'])) continue;
                                 $tab_id = $accordion_id . '-tab-' . $index;
-                                $is_active = $index === 0;
+                                $is_active = false; // No tabs active on page load
                             ?>
                                 <button 
-                                    class="accordion-tab <?php echo $is_active ? 'active' : ''; ?>"
+                                    class="accordion-tab asari-btn <?php echo $is_active ? 'active' : ''; ?>"
                                     data-tab="<?php echo esc_attr($tab_id); ?>"
                                     aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>"
                                     role="tab"
                                 >
-                                    <span class="tab-radio"></span>
+                                    <span class="tab-radio btn-icon"></span>
                                     <span class="tab-text"><?php echo esc_html($item['tab_title']); ?></span>
                                 </button>
                             <?php endforeach; ?>
@@ -130,15 +137,15 @@ if (!$title && !$subtitle && !$description && !$is_preview) {
                             <?php foreach ($accordion_items as $index => $item) : 
                                 if (!$item || !isset($item['tab_content'])) continue;
                                 $tab_id = $accordion_id . '-tab-' . $index;
-                                $is_active = $index === 0;
+                                $is_active = false; // No tabs active on page load
                             ?>
                                 <div 
-                                    class="accordion-panel <?php echo $is_active ? 'active' : ''; ?>"
+                                    class="accordion-panel bg-soft-gray rounded-lg px-large <?php echo $is_active ? 'active' : ''; ?>"
                                     id="<?php echo esc_attr($tab_id); ?>"
                                     role="tabpanel"
                                     <?php if (!$is_active) echo 'aria-hidden="true"'; ?>
                                 >
-                                    <p class="text-b3"><?php echo wp_kses_post($item['tab_content']); ?></p>
+                                    <p class="text-b2"><?php echo wp_kses_post($item['tab_content']); ?></p>
                                 </div>
                             <?php endforeach; ?>
                         </div>

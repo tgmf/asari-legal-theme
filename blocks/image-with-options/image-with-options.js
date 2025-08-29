@@ -46,9 +46,9 @@
         });
         
         // Ensure first tab is active on load
-        if (!accordion.querySelector('.accordion-tab.active')) {
-            switchTab(tabs, panels, 0);
-        }
+        // if (!accordion.querySelector('.accordion-tab.active')) {
+        //     switchTab(tabs, panels, 0);
+        // }
     }
     
     /**
