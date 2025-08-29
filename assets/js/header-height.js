@@ -18,8 +18,8 @@
             return 128;
         }
         
-        const blockGap = document.documentElement.style.getPropertyValue('--wp--style--block-gap');
-        const headerHeight = blockGap ? header.offsetHeight + parseInt(blockGap, 10) : header.offsetHeight;
+        const blockGap = getComputedStyle(document.documentElement).getPropertyValue('--wp--style--block-gap').trim();
+        const headerHeight = blockGap ? header.offsetHeight + parseInt(blockGap.replace('rem', '') * 16, 10) : header.offsetHeight;
         document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
         
         return headerHeight;
