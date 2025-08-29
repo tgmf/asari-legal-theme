@@ -48,7 +48,7 @@
         // Animation constants
         const MIN_HEIGHT = 1;    // 1rem starting height
         const MAX_HEIGHT = 17;   // 17rem final height
-        const MIN_OPACITY = 0.4; // Final opacity
+        const MIN_OPACITY = 0.5; // Final opacity
         const MIN_SCALE = 0.85;   // Final text scale
         
         // Cache DOM elements and calculations
