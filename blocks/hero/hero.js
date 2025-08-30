@@ -48,7 +48,6 @@
         // Animation constants
         const MIN_HEIGHT = 1;    // 1rem starting height
         const MAX_HEIGHT = 18;   // 18rem final height
-        const MIN_OPACITY = 0.6; // Final opacity
         const MIN_SCALE = 0.9;   // Final text scale
 
         // Cache DOM elements and calculations
@@ -80,7 +79,6 @@
             
             // Set final state if loaded beyond animation range
             if (scrollFromStart > totalDuration) {
-                heroBlock.style.opacity = MIN_OPACITY;
                 textElements.forEach(el => el.style.transform = `scale(${MIN_SCALE})`);
                 middleReveal.style.height = `${MIN_HEIGHT}rem`;
             } else updateAnimation();
@@ -114,10 +112,6 @@
                 // Height: 17rem → 1rem
                 const currentHeight = MAX_HEIGHT - (easedProgress * (MAX_HEIGHT - MIN_HEIGHT));
                 middleReveal.style.height = `${currentHeight}rem`;
-                
-                // Opacity: 1 → 0.6
-                // const currentOpacity = Math.max(MIN_OPACITY, 1 - (easedProgress * (1 - MIN_OPACITY)));
-                // heroBlock.style.opacity = currentOpacity;
                 
                 // Text scale: 1 → 0.9
                 const currentScale = Math.max(MIN_SCALE, 1 - (easedProgress * (1 - MIN_SCALE)));
