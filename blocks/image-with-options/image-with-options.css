@@ -1,5 +1,5 @@
 /**
- * Split Content Block Styles
+ * Image With Options Block Styles
  */
 
 .wp-block-asari-image-with-options {
@@ -27,7 +27,7 @@
 
 .image-with-options-subtitle {
     margin: 0;
-    opacity: 0.8;
+    opacity: 0.4;
     max-width: 13em;
     line-height: 1;
     animation: fadeInUp 0.8s ease-out 0.4s both;
@@ -116,24 +116,6 @@
     transition: all 0.3s ease;
 }
 
-/* .accordion-panel {
-    top: 0;
-    left: 0;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-}
-
-.accordion-panel.active {
-    opacity: 1;
-    max-height: 500px;
-    transform: translateY(0);
-    transition: all 0.3s ease;
-    pointer-events: auto;
-} */
-
 .accordion-panel {
     display: grid;
     grid-template-rows: 0fr;
@@ -163,13 +145,16 @@
 .image-with-options-right {
     flex: 1;
     position: relative;
-    overflow: hidden;
 }
 
 .image-with-options-image {
     width: 100%;
     height: 100%;
     position: relative;
+    will-change: transform; /* Optimize for parallax animations */
+    backface-visibility: hidden; /* Prevent flickering */
+    perspective: 1000px; /* 3D rendering context */
+    transition: all 0.3s linear;
 }
 
 .image-with-options-image img {
@@ -178,6 +163,9 @@
     object-fit: cover;
     object-position: center;
     animation: fadeIn 0.8s ease-out 0.3s both;
+    transform: translateZ(0); /* Force hardware acceleration */
+    transition: all 0.3s linear;
+    backface-visibility: hidden; /* Prevent flickering during transform */
 }
 
 /* Image Placeholder */
@@ -308,6 +296,7 @@
     
     .image-with-options-image {
         max-height: 300px;
+        transform: none !important;
     }
 }
 
@@ -322,5 +311,19 @@
     .accordion-panel {
         animation: none;
         transition: none;
+    }
+    
+    /* Disable parallax for users who prefer reduced motion */
+    .image-with-options-image {
+        will-change: auto;
+        transform: none !important;
+    }
+}
+
+/* High performance mode for older devices */
+@media (max-resolution: 1dppx) {
+    .image-with-options-image {
+        will-change: auto;
+        transform: translateZ(0); /* Keep minimal hardware acceleration */
     }
 }

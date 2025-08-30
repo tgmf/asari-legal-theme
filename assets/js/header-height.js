@@ -18,11 +18,12 @@
             return 128;
         }
         
-        const blockGap = getComputedStyle(document.documentElement).getPropertyValue('--wp--style--block-gap').trim();
+        const blockGap = 0; //getComputedStyle(document.documentElement).getPropertyValue('--wp--style--block-gap').trim();
+        const adminBarHeight = document.querySelector('#wpadminbar') ? document.querySelector('#wpadminbar').offsetHeight : 0;
         const headerHeight = blockGap ? header.offsetHeight + parseInt(blockGap.replace('rem', '') * 16, 10) : header.offsetHeight;
-        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-        
-        return headerHeight;
+        document.documentElement.style.setProperty('--header-height', `${headerHeight + adminBarHeight}px`);
+
+        return headerHeight + adminBarHeight;
     }
     
     /**

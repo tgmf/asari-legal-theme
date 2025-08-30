@@ -58,13 +58,16 @@ if (!$title && !$subtitle && !$description && !$is_preview) {
     echo '</div>';
     return;
 }
+
+// Get block wrapper attributes (includes spacing styles)
+$wrapper_attributes = get_block_wrapper_attributes([
+    'id' => $id,
+    'class' => $className,
+    'data-accordion-id' => $accordion_id
+]);
 ?>
 
-<section 
-    id="<?php echo esc_attr($id); ?>" 
-    class="<?php echo esc_attr($className); ?>"
-    data-accordion-id="<?php echo esc_attr($accordion_id); ?>"
->
+<section <?php echo $wrapper_attributes; ?>>
     <div class="image-with-options-container">
         
         <!-- Left Content -->

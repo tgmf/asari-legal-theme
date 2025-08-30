@@ -44,6 +44,11 @@
 					"size": "2.5rem",
 					"slug": "2-x-large",
 					"name": "Even larger"
+				},
+				{
+					"size": "6rem",
+					"slug": "block-gap",
+					"name": "Asari Block Gap"
 				}
 			]
 		},

@@ -12,7 +12,7 @@
         const heroBlocks = document.querySelectorAll('.wp-block-asari-hero');
         heroBlocks.forEach(setupHeroBlock);
     }
-    
+
     /**
      * Setup individual hero block
      */
@@ -28,7 +28,7 @@
                 heroBlock.classList.add('hero-bg-loaded');
             });
         }
-        
+
         heroBlock.style.setProperty('--hero-text-alignment', textAlignment);
         heroBlock.classList.add('hero-loaded');
         console.log(document.body.classList.contains('block-editor-iframe__body'));
@@ -44,23 +44,23 @@
             // In editor - don't run scroll animations
             return;
         }
-        
+
         // Animation constants
         const MIN_HEIGHT = 1;    // 1rem starting height
-        const MAX_HEIGHT = 17;   // 17rem final height
-        const MIN_OPACITY = 0.5; // Final opacity
-        const MIN_SCALE = 0.85;   // Final text scale
-        
+        const MAX_HEIGHT = 18;   // 18rem final height
+        const MIN_OPACITY = 0.6; // Final opacity
+        const MIN_SCALE = 0.9;   // Final text scale
+
         // Cache DOM elements and calculations
         const textElements = heroBlock.querySelectorAll('.hero-top-text span, .hero-bottom-text span');
-        
+
         function getAnimationConfig() {
             const heroContent = heroBlock.querySelector('.hero-content');
             const headerHeight = parseInt(
                 getComputedStyle(document.documentElement)
                     .getPropertyValue('--header-height') || '128'
             );
-            
+
             return {
                 heroTop: heroBlock.offsetTop,
                 headerHeight,
@@ -93,12 +93,12 @@
             const config = getAnimationConfig();
             const scrollFromStart = window.scrollY - config.animationStart;
             const totalDuration = config.phase1Duration + config.phase2Duration;
-            
+
             // Early return if outside animation range
             if (scrollFromStart <= 0 || scrollFromStart > totalDuration) {
                 return;
             }
-            
+
             if (scrollFromStart <= config.phase1Duration) {
                 // Phase 1: Expansion with easing
                 const progress = scrollFromStart / config.phase1Duration;
@@ -106,18 +106,18 @@
                 const currentHeight = MIN_HEIGHT + (easedProgress * (MAX_HEIGHT - MIN_HEIGHT));
                 
                 middleReveal.style.height = `${currentHeight}rem`;
-                
+
             } else {
                 // Phase 2: Contraction with fade effects (linear)
                 const progress = (scrollFromStart - config.phase1Duration) / config.phase2Duration;
-                const easedProgress = easeOutQuad(progress);
+                const easedProgress = (progress);
                 // Height: 17rem → 1rem
                 const currentHeight = MAX_HEIGHT - (easedProgress * (MAX_HEIGHT - MIN_HEIGHT));
                 middleReveal.style.height = `${currentHeight}rem`;
                 
-                // Opacity: 1 → 0.4
-                const currentOpacity = Math.max(MIN_OPACITY, 1 - (easedProgress * (1 - MIN_OPACITY)));
-                heroBlock.style.opacity = currentOpacity;
+                // Opacity: 1 → 0.6
+                // const currentOpacity = Math.max(MIN_OPACITY, 1 - (easedProgress * (1 - MIN_OPACITY)));
+                // heroBlock.style.opacity = currentOpacity;
                 
                 // Text scale: 1 → 0.9
                 const currentScale = Math.max(MIN_SCALE, 1 - (easedProgress * (1 - MIN_SCALE)));

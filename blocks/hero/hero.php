@@ -60,19 +60,26 @@ if (!$top_text && !$bottom_text && !$is_preview) {
     echo '</div>';
     return;
 }
+// Get block wrapper attributes (includes spacing styles)
+$wrapper_attributes = get_block_wrapper_attributes([
+    'id' => $id,
+    'class' => $className,
+    'data-accordion-id' => isset($accordion_id) ? $accordion_id : '',
+    'aria-label' => $bg_alt ?: ''
+]);
+
+// Add custom data attributes
+foreach ($data_attrs as $attr) {
+    $wrapper_attributes .= ' ' . $attr;
+}
 ?>
 
-<section 
-    id="<?php echo esc_attr($id); ?>" 
-    class="<?php echo esc_attr($className); ?>"
-    <?php echo implode(' ', $data_attrs); ?>
-    <?php if ($bg_alt): ?>aria-label="<?php echo $bg_alt; ?>"<?php endif; ?>
->
+<section <?php echo $wrapper_attributes; ?>>
     <div class="hero-content">
 
         <?php if ($top_text) : ?>
             <div class="hero-top-text bg-white">
-                <span class="hero-top-text-inner font-manege">
+                <span class="hero-top-text-inner font-manege line-height-tight mb-medium">
                     <?php echo wp_kses_post($top_text); ?>
                 </span>
             </div>
@@ -82,7 +89,7 @@ if (!$top_text && !$bottom_text && !$is_preview) {
 
         <?php if ($bottom_text) : ?>
             <div class="hero-bottom-text bg-white">
-                <span class="hero-bottom-text-inner font-cofo">
+                <span class="hero-bottom-text-inner font-cofo line-height-tight mt-medium">
                     <?php echo wp_kses_post($bottom_text); ?>
                 </span>
             </div>

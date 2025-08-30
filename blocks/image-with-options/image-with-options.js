@@ -1,29 +1,123 @@
 /**
- * Split Content Block Frontend JavaScript
+ * Image With Options Block Frontend JavaScript
  */
 
 (function() {
     'use strict';
     
     /**
-     * Initialize split content blocks when DOM is ready
+     * Initialize image with options blocks when DOM is ready
      */
-    function initSplitContentBlocks() {
-        const splitContentBlocks = document.querySelectorAll('.wp-block-asari-image-with-options');
-        splitContentBlocks.forEach(setupSplitContentBlock);
+    function initImageWithOptionsBlocks() {
+        const imageWithOptionsBlocks = document.querySelectorAll('.wp-block-asari-image-with-options');
+        imageWithOptionsBlocks.forEach(setupImageWithOptionsBlock);
     }
     
     /**
-     * Setup individual split content block
+     * Setup individual image with options block
      */
-    function setupSplitContentBlock(block) {
+    function setupImageWithOptionsBlock(block) {
         const accordion = block.querySelector('.image-with-options-accordion');
         if (accordion) {
             setupAccordion(accordion);
         }
         
+        // Setup parallax effect for the image
+        const imageElement = block.querySelector('.image-with-options-image');
+        if (imageElement) {
+            setupParallaxEffect(block, imageElement);
+        }
+        
         // Add loaded class for animations
         block.classList.add('image-with-options-loaded');
+    }
+    
+    /**
+     * Setup aggressive parallax effect for the image
+     */
+    function setupParallaxEffect(block, imageElement) {
+        // Check if we're in editor environment
+        if (document.body.classList.contains('block-editor-iframe__body')) {
+            // In editor - don't run parallax animations
+            return;
+        }
+        
+        function updateParallax() {
+            const headerHeight = parseInt(
+                getComputedStyle(document.documentElement)
+                    .getPropertyValue('--header-height') || '128'
+            );
+            
+            const blockRect = block.getBoundingClientRect();
+            const blockTop = blockRect.top;
+            const windowHeight = window.innerHeight;
+            const triggerPoint = windowHeight / 1.5;
+            
+            // End point: when block top touches header
+            const endPoint = headerHeight;
+            
+            // Calculate progress from trigger to end point
+            const totalDistance = triggerPoint - endPoint;
+            const currentDistance = blockTop - endPoint;
+            const progress = Math.max(0, Math.min(1, 1 - (currentDistance / totalDistance)));
+            
+            if (blockTop > triggerPoint) {
+                // Before trigger: image is below screen
+                const belowOffset = windowHeight * 0.33; // Start 33% of screen height below
+                imageElement.style.transform = `translateY(${belowOffset}px)`;
+                
+            } else if (blockTop > endPoint) {
+                // Between trigger and end: aggressive catch-up with easing
+                const easedProgress = easeOutQuad(progress);
+                const belowOffset = windowHeight * 0.33;
+                const currentOffset = belowOffset * (1 - easedProgress);
+                imageElement.style.transform = `translateY(${currentOffset}px)`;
+                
+            } else {
+                // After end point: move together with block (no transform)
+                imageElement.style.transform = 'translateY(0)';
+            }
+        }
+        
+        // Throttled scroll listener
+        let isScrolling = false;
+        
+        function onScroll() {
+            if (!isScrolling) {
+                requestAnimationFrame(() => {
+                    updateParallax();
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        }
+        
+        // Initial update
+        updateParallax();
+        
+        // Setup scroll listener
+        window.addEventListener('scroll', onScroll, { passive: true });
+        
+        // Store cleanup function and update function
+        block._parallaxCleanup = () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+        block._parallaxUpdate = updateParallax;
+    }
+    
+    /**
+     * Easing function for smooth catch-up effect
+     */
+    function easeOutQuad(t) {
+        return t * (2 - t);
+    }
+
+    function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+    }
+
+    function easeInQuad(t) {
+        return t * t;
     }
     
     /**
@@ -125,19 +219,37 @@
                 content.style.minHeight = activePanel.offsetHeight + 'px';
             }
         });
+        
+        // Re-run parallax calculations on resize
+        const imageWithOptionsBlocks = document.querySelectorAll('.wp-block-asari-image-with-options');
+        imageWithOptionsBlocks.forEach(block => {
+            const imageElement = block.querySelector('.image-with-options-image');
+            if (imageElement && block._parallaxUpdate) {
+                block._parallaxUpdate();
+            }
+        });
     }
     
     /**
      * Cleanup function
      */
     function cleanup() {
-        const splitContentBlocks = document.querySelectorAll('.wp-block-asari-image-with-options');
-        splitContentBlocks.forEach(block => {
+        const imageWithOptionsBlocks = document.querySelectorAll('.wp-block-asari-image-with-options');
+        imageWithOptionsBlocks.forEach(block => {
+            // Clean up accordion listeners
             const tabs = block.querySelectorAll('.accordion-tab');
             tabs.forEach(tab => {
-                // Remove cloned event listeners (if any cleanup is needed)
                 tab.replaceWith(tab.cloneNode(true));
             });
+            
+            // Clean up parallax listeners
+            if (block._parallaxCleanup) {
+                block._parallaxCleanup();
+                delete block._parallaxCleanup;
+            }
+            if (block._parallaxUpdate) {
+                delete block._parallaxUpdate;
+            }
         });
     }
     
@@ -145,7 +257,7 @@
      * Initialize everything
      */
     function init() {
-        initSplitContentBlocks();
+        initImageWithOptionsBlocks();
         
         // Debounced resize handler
         let resizeTimeout;
@@ -156,7 +268,7 @@
         
         // Re-initialize on dynamic content loading
         if (typeof window.wp !== 'undefined' && window.wp.hooks) {
-            window.wp.hooks.addAction('asari.contentLoaded', 'asari/image-with-options', initSplitContentBlocks);
+            window.wp.hooks.addAction('asari.contentLoaded', 'asari/image-with-options', initImageWithOptionsBlocks);
         }
         
         // Initial resize calculation
@@ -171,9 +283,9 @@
     }
     
     // Expose API for external use
-    window.asariSplitContent = {
-        init: initSplitContentBlocks,
-        setupBlock: setupSplitContentBlock,
+    window.asariImageWithOptions = {
+        init: initImageWithOptionsBlocks,
+        setupBlock: setupImageWithOptionsBlock,
         cleanup: cleanup
     };
     
