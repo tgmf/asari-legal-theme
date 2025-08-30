@@ -88,8 +88,8 @@ function asari_legal_scripts() {
     );
 
     wp_enqueue_script(
-        'asari-legal-opacity-system',
-        get_template_directory_uri() . '/assets/js/opacity-system.js',
+        'asari-legal-parallax-opacity',
+        get_template_directory_uri() . '/assets/js/parallax-opacity-system.js',
         array(), // No dependencies
         wp_get_theme()->get('Version'),
         true // Load in footer
