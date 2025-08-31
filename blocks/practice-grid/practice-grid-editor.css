@@ -1,0 +1,208 @@
+/**
+ * Practice Grid Block Editor Styles
+ * Styles specific to the block editor interface
+ */
+
+/* Editor-specific overrides */
+.wp-block-asari-practice-grid {
+    /* Ensure proper display in editor */
+    position: relative !important;
+    min-height: 400px;
+    color: black;
+}
+
+/* Editor preview mode adjustments */
+.block-editor-block-preview__content .wp-block-asari-practice-grid {
+    min-height: 300px;
+}
+
+.block-editor-block-preview__content .practice-grid-container {
+    gap: var(--wp--preset--spacing--small);
+}
+
+/* Block appender styling */
+.wp-block-asari-practice-grid .block-list-appender {
+    position: relative;
+    z-index: 4;
+}
+
+/* Selected state */
+.wp-block.is-selected .wp-block-asari-practice-grid {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: -2px;
+}
+
+/* Editor placeholder */
+.wp-block-asari-practice-grid.is-empty-placeholder {
+    background: var(--wp--preset--color--asari-soft-gray);
+    color: var(--wp--preset--color--asari-gray);
+    border: 2px dashed var(--wp--preset--color--asari-gray);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--wp--preset--font-family--cofo-gothic);
+    font-size: var(--wp--preset--font-size--b-3);
+}
+
+.wp-block-asari-practice-grid.is-empty-placeholder p {
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Block controls visibility */
+.wp-block-asari-practice-grid:hover .block-editor-block-list__block-edit::before {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: -2px;
+}
+
+/* Editor-specific content adjustments */
+.block-editor-writing-flow .wp-block-asari-practice-grid .practice-grid-container {
+    pointer-events: none; /* Prevent selection conflicts */
+}
+
+.block-editor-writing-flow .wp-block-asari-practice-grid.is-selected .practice-grid-container {
+    pointer-events: auto;
+}
+
+/* Prevent layout issues in editor */
+.block-editor-writing-flow .practice-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--small);
+}
+
+/* Practice card editor adjustments */
+.block-editor-writing-flow .practice-card {
+    position: relative;
+    transform: none; /* Disable parallax in editor */
+}
+
+.block-editor-writing-flow .practice-card-link {
+    pointer-events: none;
+    cursor: default;
+}
+
+.block-editor-writing-flow .practice-card-link:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Editor card preview styling */
+.block-editor-writing-flow .practice-card-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px dashed var(--wp-admin-theme-color, #007cba);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.block-editor-writing-flow .wp-block.is-selected .practice-card-link::after {
+    opacity: 0.3;
+}
+
+/* Preview mode specific styles */
+.acf-block-preview .wp-block-asari-practice-grid {
+    animation: none; /* Disable animations in preview */
+}
+
+.acf-block-preview .practice-card {
+    transform: none;
+    animation: none;
+}
+
+.acf-block-preview .practice-card-link:hover {
+    transform: none;
+}
+
+/* Editor image handling */
+.block-editor-writing-flow .practice-card-image img {
+    animation: none;
+    transform: none;
+}
+
+.block-editor-writing-flow .practice-card-link:hover .practice-card-image {
+    transform: none;
+}
+
+.block-editor-writing-flow .practice-card-link:hover .practice-card-image img {
+    opacity: 1;
+}
+
+/* Editor description handling */
+.block-editor-writing-flow .practice-card-description {
+    position: relative;
+    opacity: 0.7;
+    transform: none;
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    margin-top: var(--wp--preset--spacing--small);
+}
+
+/* Responsive editor preview */
+@media (max-width: 1024px) {
+    .block-editor-writing-flow .practice-grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .block-editor-writing-flow .practice-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .wp-block-asari-practice-grid {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .block-editor-writing-flow .practice-grid-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .wp-block-asari-practice-grid {
+        min-height: 250px;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .wp-block-asari-practice-grid.is-empty-placeholder {
+        border-width: 3px;
+        background: transparent;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wp-block-asari-practice-grid,
+    .wp-block-asari-practice-grid .practice-card,
+    .wp-block-asari-practice-grid .practice-card-link,
+    .wp-block-asari-practice-grid .practice-card-image,
+    .wp-block-asari-practice-grid .practice-card-description {
+        animation: none;
+        transition: none;
+        transform: none !important;
+    }
+}
+
+/* Focus states for accessibility */
+.wp-block-asari-practice-grid:focus-within {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: 2px;
+}
+
+/* Block toolbar positioning */
+.wp-block.is-selected .wp-block-asari-practice-grid .block-editor-block-contextual-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}

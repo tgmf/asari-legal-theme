@@ -77,6 +77,14 @@ function asari_legal_scripts() {
         array('asari-legal-style'), // Depend on main styles
         wp_get_theme()->get('Version')
     );
+
+    // Animations
+    wp_enqueue_style(
+        'asari-legal-animations',
+        get_template_directory_uri() . '/assets/css/animations.css',
+        array('asari-legal-style'),
+        wp_get_theme()->get('Version')
+    );
     
     // Header height calculator - load early
     wp_enqueue_script(
@@ -117,6 +125,7 @@ function asari_legal_register_blocks() {
     $block_dirs = array(
         'hero',
         'image-with-options',
+        'practice-grid',
         // Add other block directories here as you create them
         // 'employee-grid',
         // 'practice-showcase',

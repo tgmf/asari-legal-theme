@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schemas.wp.org/wp/6.8/block.json",
+    "apiVersion": 3,
+    "name": "asari/practice-grid",
+    "title": "Practice Grid",
+    "description": "A responsive grid displaying all practice areas with hover effects",
+    "category": "asari-blocks",
+    "icon": "grid-view",
+    "keywords": ["practice", "grid", "services", "expertise"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "practice-grid.php"
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "blockGap": true
+        }
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "title": "Каждая задача многогранна.",
+                "subtitle": "Каждый проект уникален."
+            }
+        }
+    },
+    "textdomain": "asari-legal-theme",
+    "script": "file:./practice-grid.js",
+    "editorStyle": "file:./practice-grid-editor.css",
+    "style": "file:./practice-grid.css"
+}

@@ -1,0 +1,286 @@
+/**
+ * Practice Grid Block Styles
+ */
+
+.wp-block-asari-practice-grid {
+    position: relative;
+    color: var(--wp--preset--color--asari-black);
+    padding: 0 var(--wp--preset--spacing--x-large);
+}
+
+/* Header Section */
+.practice-grid-header {
+    max-width: 60%;
+}
+
+.practice-grid-subtitle {
+    margin: 0;
+}
+
+/* Grid Container */
+.practice-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--large);
+    max-width: var(--wp--style--global--content-size);
+    margin: 0 auto;
+}
+
+/* Practice Card */
+.practice-card {
+    position: relative;
+    opacity: 0;
+    margin-top: 230px;
+    transition: opacity 0.8s ease-out, margin-top 0.8s ease-out;
+}
+
+/* When individual card is animated */
+.practice-card.animate {
+    opacity: 1;
+    margin-top: 0;
+}
+
+.practice-card-link {
+    display: block;
+    background-color: var(--wp--preset--color--asari-white);
+    border: 1px solid var(--wp--preset--color--asari-gray);
+    border-radius: var(--wp--preset--spacing--medium);
+    padding: var(--wp--preset--spacing--medium);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    height: 12.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.practice-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+    border-color: transparent;
+    box-shadow: 0px 0px 1.5rem 0px rgba(184, 203, 229, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Card Image */
+.practice-card-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7.5rem;
+    margin-bottom: var(--wp--preset--spacing--medium);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.practice-card-image img {
+    max-width: 6.25rem;
+    max-height: 6.25rem;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.practice-card-link:hover .practice-card-image {
+    transform: scale(3.3) translateY(.66rem);
+}
+
+.practice-card-link:hover .practice-card-image img {
+    opacity: 0.7;
+}
+
+/* Placeholder Icon */
+.practice-card-placeholder {
+    color: var(--wp--preset--color--asari-gray);
+}
+
+.placeholder-icon svg {
+    width: 4rem;
+    height: 4rem;
+}
+
+/* Card Content */
+.practice-card-content {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.practice-card-title {
+    margin: 0 0 var(--wp--preset--spacing--small) 0;
+    font-weight: 200;
+}
+
+/* Card Description (Hidden by default, shown on hover) */
+.practice-card-description {
+    opacity: 0;
+    height: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: var(--wp--preset--spacing--small);
+    border-radius: var(--wp--preset--spacing--small);
+}
+
+.practice-card-link:hover .practice-card-content {
+    transform: translateY(-8rem);
+}
+
+.practice-card-link:hover .practice-card-description {
+    opacity: 1;
+}
+
+.practice-card-description p {
+    margin: 0;
+}
+
+/* Empty State */
+.practice-grid-empty {
+    text-align: center;
+    padding: var(--wp--preset--spacing--2-x-large);
+}
+
+/* Empty Placeholder */
+.wp-block-asari-practice-grid.is-empty-placeholder {
+    min-height: 200px;
+    background: var(--wp--preset--color--asari-warm-gray);
+    color: var(--wp--preset--color--asari-gray);
+    border: 2px dashed var(--wp--preset--color--asari-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Wide and Full Width Alignments */
+.wp-block-asari-practice-grid.alignwide .practice-grid-container {
+    max-width: var(--wp--style--global--wide-size);
+}
+
+.wp-block-asari-practice-grid.alignfull {
+    width: 100vw;
+    margin-left: calc(-100vw / 2 + 100% / 2);
+    margin-right: calc(-100vw / 2 + 100% / 2);
+}
+
+.wp-block-asari-practice-grid.alignfull .practice-grid-container {
+    max-width: var(--wp--style--global--wide-size);
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .practice-grid-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--wp--preset--spacing--medium);
+    }
+}
+
+@media (max-width: 768px) {
+    .practice-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--wp--preset--spacing--medium);
+    }
+    
+    .practice-grid-header {
+        max-width: 90%;
+        margin-bottom: var(--wp--preset--spacing--x-large);
+    }
+    
+    .practice-grid-title {
+        font-size: var(--wp--preset--font-size--h-3);
+    }
+    
+    .practice-grid-subtitle {
+        font-size: var(--wp--preset--font-size--b-1);
+    }
+    
+    .practice-card-image {
+        height: 100px;
+    }
+    
+    .practice-card-image img {
+        max-width: 60px;
+        max-height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wp-block-asari-practice-grid {
+        padding: var(--wp--preset--spacing--x-large) var(--wp--preset--spacing--small);
+    }
+    
+    .practice-grid-container {
+        grid-template-columns: 1fr;
+        gap: var(--wp--preset--spacing--small);
+    }
+    
+    .practice-grid-header {
+        max-width: 100%;
+        margin-bottom: var(--wp--preset--spacing--large);
+    }
+    
+    .practice-card-link {
+        padding: var(--wp--preset--spacing--medium);
+    }
+    
+    .practice-card-image {
+        height: 80px;
+        margin-bottom: var(--wp--preset--spacing--small);
+    }
+    
+    .practice-card-image img {
+        max-width: 48px;
+        max-height: 48px;
+    }
+    
+    .placeholder-icon svg {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .wp-block-asari-practice-grid {
+        page-break-inside: avoid;
+    }
+    
+    .practice-card-link {
+        box-shadow: none !important;
+        transform: none !important;
+    }
+    
+    .practice-card-description {
+        opacity: 1 !important;
+        transform: none !important;
+        position: static !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .practice-card,
+    .practice-card-link,
+    .practice-card-image,
+    .practice-card-image img,
+    .practice-card-description {
+        transition: none;
+        transform: none !important;
+        animation: none;
+    }
+    
+    .practice-card-link:hover {
+        transform: none;
+    }
+    
+    .practice-card-link:hover .practice-card-image {
+        transform: none;
+    }
+}
+
+/* Focus states for accessibility */
+.practice-card-link:focus {
+    outline: 2px solid var(--wp--preset--color--asari-gold);
+    outline-offset: 2px;
+}
