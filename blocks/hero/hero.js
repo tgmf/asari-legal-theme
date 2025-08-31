@@ -137,10 +137,11 @@
         
         window.addEventListener('scroll', onScroll, { passive: true });
         
-        // Store cleanup function
+        // Store cleanup function and update animation reference
         heroBlock._scrollCleanup = () => {
             window.removeEventListener('scroll', onScroll);
         };
+        heroBlock._updateAnimation = updateAnimation;
     }
 
     function easeOutQuad(t) {
@@ -170,8 +171,10 @@
     function handleResize() {
         const heroBlocks = document.querySelectorAll('.wp-block-asari-hero');
         heroBlocks.forEach(heroBlock => {
-            // Force recalculation by triggering reflow
-            heroBlock.style.minHeight = heroBlock.style.minHeight;
+            // Update animation calculations with new viewport dimensions
+            if (heroBlock._updateAnimation) {
+                heroBlock._updateAnimation();
+            }
         });
     }
     
@@ -184,6 +187,9 @@
             if (heroBlock._scrollCleanup) {
                 heroBlock._scrollCleanup();
                 delete heroBlock._scrollCleanup;
+            }
+            if (heroBlock._updateAnimation) {
+                delete heroBlock._updateAnimation;
             }
         });
     }
