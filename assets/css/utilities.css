@@ -165,6 +165,8 @@
 .mr-x-large { margin-right: var(--wp--preset--spacing--x-large); }
 .mr-2x-large { margin-right: var(--wp--preset--spacing--2-x-large); }
 
+.my-0 { margin-top: 0; margin-bottom: 0;}
+
 /* Paddings */
 .p-0 { padding: 0; }
 .p-x-small { padding: var(--wp--preset--spacing--x-small); }
@@ -226,6 +228,7 @@
    WIDTH & HEIGHT
    ========================================================================== */
 .w-auto { width: auto; }
+.w-half { width: 50%; }
 .w-full { width: 100%; }
 .w-screen { width: 100vw; }
 

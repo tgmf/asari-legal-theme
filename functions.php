@@ -86,6 +86,14 @@ function asari_legal_scripts() {
         wp_get_theme()->get('Version')
     );
     
+    // Swiper CSS - Load globally to prevent layout issues
+    wp_enqueue_style(
+        'swiper-bundle',
+        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+        array(),
+        '11.0.5'
+    );
+    
     // Header height calculator - load early
     wp_enqueue_script(
         'asari-legal-header-height',
@@ -126,6 +134,7 @@ function asari_legal_register_blocks() {
         'hero',
         'image-with-options',
         'practice-grid',
+        'team-swiper',
         // Add other block directories here as you create them
         // 'employee-grid',
         // 'practice-showcase',

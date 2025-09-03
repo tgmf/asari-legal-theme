@@ -1,0 +1,286 @@
+/**
+ * Team Swiper Block Editor Styles
+ * Styles specific to the block editor interface
+ */
+
+/* Editor-specific overrides */
+.wp-block-asari-team-swiper {
+    /* Ensure proper display in editor */
+    position: relative !important;
+    min-height: 400px;
+    color: black;
+}
+
+/* Editor preview mode adjustments */
+.block-editor-block-preview__content .wp-block-asari-team-swiper {
+    min-height: 300px;
+}
+
+.block-editor-block-preview__content .team-swiper-wrapper .swiper {
+    padding: 0 var(--wp--preset--spacing--small);
+}
+
+/* Block appender styling */
+.wp-block-asari-team-swiper .block-list-appender {
+    position: relative;
+    z-index: 4;
+}
+
+/* Selected state */
+.wp-block.is-selected .wp-block-asari-team-swiper {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: -2px;
+}
+
+/* Editor placeholder */
+.wp-block-asari-team-swiper.is-empty-placeholder {
+    background: var(--wp--preset--color--asari-soft-gray);
+    color: var(--wp--preset--color--asari-gray);
+    border: 2px dashed var(--wp--preset--color--asari-gray);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--wp--preset--font-family--cofo-gothic);
+    font-size: var(--wp--preset--font-size--b-3);
+}
+
+.wp-block-asari-team-swiper.is-empty-placeholder p {
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Block controls visibility */
+.wp-block-asari-team-swiper:hover .block-editor-block-list__block-edit::before {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: -2px;
+}
+
+/* Editor-specific content adjustments */
+.block-editor-writing-flow .wp-block-asari-team-swiper .team-swiper-wrapper {
+    pointer-events: none; /* Prevent selection conflicts */
+}
+
+.block-editor-writing-flow .wp-block-asari-team-swiper.is-selected .team-swiper-wrapper {
+    pointer-events: auto;
+}
+
+/* Editor swiper adjustments */
+.block-editor-writing-flow .team-swiper-wrapper .swiper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: var(--wp--preset--spacing--small) 0;
+}
+
+.block-editor-writing-flow .swiper-wrapper {
+    display: flex !important;
+    gap: var(--wp--preset--spacing--medium);
+    width: max-content;
+}
+
+.block-editor-writing-flow .swiper-slide {
+    flex: none;
+    width: 16.875rem; /* Match frontend size */
+}
+
+/* Hide navigation in editor */
+.block-editor-writing-flow .swiper-button-prev,
+.block-editor-writing-flow .swiper-button-next {
+    display: none !important;
+}
+
+/* Team member card editor adjustments */
+.block-editor-writing-flow .team-member-link {
+    pointer-events: none;
+    cursor: default;
+}
+
+.block-editor-writing-flow .team-member-link:hover {
+    transform: none;
+}
+
+/* Editor image handling - show both images slightly overlapped */
+.block-editor-writing-flow .team-member-image {
+    position: relative;
+}
+
+.block-editor-writing-flow .team-member-bw,
+.block-editor-writing-flow .team-member-color {
+    position: absolute;
+    animation: none;
+    transform: none;
+}
+
+.block-editor-writing-flow .team-member-bw {
+    opacity: 0.7;
+    z-index: 2;
+}
+
+.block-editor-writing-flow .team-member-color {
+    opacity: 0.3;
+    z-index: 1;
+    transform: translateX(2px) translateY(2px);
+}
+
+/* Editor preview indicator */
+.block-editor-writing-flow .team-member-card::after {
+    content: 'Hover Preview';
+    position: absolute;
+    top: var(--wp--preset--spacing--small);
+    right: var(--wp--preset--spacing--small);
+    background: rgba(0, 123, 186, 0.9);
+    color: white;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.block-editor-writing-flow .wp-block.is-selected .team-member-card::after {
+    opacity: 1;
+}
+
+/* Preview mode specific styles */
+.acf-block-preview .wp-block-asari-team-swiper {
+    animation: none; /* Disable animations in preview */
+}
+
+.acf-block-preview .team-member-bw,
+.acf-block-preview .team-member-color {
+    animation: none;
+    transition: none;
+}
+
+/* Header editor adjustments */
+.block-editor-writing-flow .team-swiper-content {
+    gap: var(--wp--preset--spacing--medium);
+}
+
+.block-editor-writing-flow .team-swiper-link .asari-btn {
+    pointer-events: none;
+    position: relative;
+}
+
+.block-editor-writing-flow .team-swiper-link .asari-btn::after {
+    content: 'Button Preview';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 123, 186, 0.1);
+    border: 1px dashed var(--wp-admin-theme-color, #007cba);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--wp-admin-theme-color, #007cba);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: inherit;
+}
+
+.block-editor-writing-flow .wp-block.is-selected .team-swiper-link .asari-btn::after {
+    opacity: 1;
+}
+
+/* Responsive editor preview */
+@media (max-width: 1024px) {
+    .block-editor-writing-flow .swiper-slide {
+        width: 14rem; /* Match frontend responsive size */
+    }
+}
+
+@media (max-width: 768px) {
+    .wp-block-asari-team-swiper {
+        min-height: 350px;
+    }
+    
+    .block-editor-writing-flow .team-swiper-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .block-editor-writing-flow .swiper-slide {
+        width: 12rem;
+    }
+    
+    .block-editor-writing-flow .team-swiper-wrapper .swiper {
+        padding: 0 var(--wp--preset--spacing--small);
+    }
+}
+
+@media (max-width: 480px) {
+    .wp-block-asari-team-swiper {
+        min-height: 300px;
+    }
+    
+    .block-editor-writing-flow .swiper-slide {
+        width: 10rem;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .wp-block-asari-team-swiper.is-empty-placeholder {
+        border-width: 3px;
+        background: transparent;
+    }
+    
+    .block-editor-writing-flow .team-member-card::after,
+    .block-editor-writing-flow .team-swiper-link .asari-btn::after {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wp-block-asari-team-swiper,
+    .wp-block-asari-team-swiper .team-member-bw,
+    .wp-block-asari-team-swiper .team-member-color,
+    .wp-block-asari-team-swiper .team-member-name {
+        animation: none;
+        transition: none;
+        transform: none !important;
+    }
+    
+    .block-editor-writing-flow .team-member-color {
+        transform: none !important;
+    }
+}
+
+/* Focus states for accessibility */
+.wp-block-asari-team-swiper:focus-within {
+    outline: 2px solid var(--wp-admin-theme-color, #007cba);
+    outline-offset: 2px;
+}
+
+/* Block toolbar positioning */
+.wp-block.is-selected .wp-block-asari-team-swiper .block-editor-block-contextual-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Editor scrollbar styling for swiper container */
+.block-editor-writing-flow .team-swiper-wrapper .swiper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.block-editor-writing-flow .team-swiper-wrapper .swiper::-webkit-scrollbar-track {
+    background: var(--wp--preset--color--asari-warm-gray);
+    border-radius: 3px;
+}
+
+.block-editor-writing-flow .team-swiper-wrapper .swiper::-webkit-scrollbar-thumb {
+    background: var(--wp--preset--color--asari-gold);
+    border-radius: 3px;
+}
+
+.block-editor-writing-flow .team-swiper-wrapper .swiper::-webkit-scrollbar-thumb:hover {
+    background: var(--wp--preset--color--asari-deep-gold);
+}

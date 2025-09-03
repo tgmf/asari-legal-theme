@@ -1,0 +1,398 @@
+/**
+ * Team Swiper Block Styles
+ */
+
+.wp-block-asari-team-swiper {
+    position: relative;
+    color: var(--wp--preset--color--asari-black);
+    padding: var(--wp--preset--spacing--2-x-large) 0;
+}
+
+/* Header Section */
+.team-swiper-header-wrapper {
+    position: relative;
+}
+
+.team-swiper-content {
+    gap: var(--wp--preset--spacing--x-large);
+}
+
+.team-swiper-title {
+    max-width: 20em;
+}
+
+.team-swiper-subtitle {
+    max-width: 20em;
+}
+
+/* Swiper Container */
+.team-swiper-wrapper {
+    position: relative;
+}
+
+.team-swiper-wrapper .swiper {
+    padding: 0 var(--wp--preset--spacing--x-large);
+}
+
+/* Swiper Slides */
+.team-swiper-wrapper .swiper-slide {
+    width: 16.875rem; /* 270px */
+    height: auto;
+}
+
+/* Team Member Card */
+.team-member-card {
+    position: relative;
+    width: 100%;
+}
+
+.team-member-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.team-member-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Team Member Image */
+.team-member-image {
+    position: relative;
+    width: 16.875rem; /* 270px */
+    height: 18.75rem; /* 300px */
+    overflow: hidden;
+    border-radius: var(--wp--preset--spacing--small);
+    margin-bottom: var(--wp--preset--spacing--medium);
+    background-color: var(--wp--preset--color--asari-warm-gray);
+}
+
+.team-member-bw,
+.team-member-color {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Default state: show B&W, hide color */
+.team-member-bw {
+    opacity: 1;
+    z-index: 2;
+}
+
+.team-member-color {
+    opacity: 0;
+    z-index: 1;
+    transform: scale(1.05);
+}
+
+/* Hover state: hide B&W, show color */
+.team-member-link:hover .team-member-bw {
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+.team-member-link:hover .team-member-color {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Team Member Info */
+.team-member-info {
+    text-align: center;
+    padding: 0 var(--wp--preset--spacing--small);
+}
+
+.team-member-name {
+    transition: color 0.3s ease;
+}
+
+.team-member-link:hover .team-member-name {
+    color: var(--wp--preset--color--asari-gold);
+}
+
+.team-member-position {
+    transition: opacity 0.3s ease;
+}
+
+/* Navigation Buttons */
+.swiper-navigation {
+    gap: var(--wp--preset--spacing--small);
+}
+
+.team-swiper-wrapper .swiper-button-prev,
+.team-swiper-wrapper .swiper-button-next {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--wp--preset--color--asari-white);
+    border: 1px solid var(--wp--preset--color--asari-warm-gray);
+    border-radius: 50%;
+    color: var(--wp--preset--color--asari-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.team-swiper-wrapper .swiper-button-prev::after,
+.team-swiper-wrapper .swiper-button-next::after {
+    display: none; /* Hide default Swiper arrows */
+}
+
+.team-swiper-wrapper .swiper-button-prev {
+    left: 0;
+}
+
+.team-swiper-wrapper .swiper-button-next {
+    right: 0;
+}
+
+.team-swiper-wrapper .swiper-button-prev:hover,
+.team-swiper-wrapper .swiper-button-next:hover {
+    background-color: var(--wp--preset--color--asari-soft-gray);
+    /* border-color: var(--wp--preset--color--asari-gold); */
+    color: var(--wp--preset--color--asari-gold);
+}
+
+.team-swiper-wrapper .swiper-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.team-swiper-wrapper .swiper-button-disabled:hover {
+    background-color: var(--wp--preset--color--asari-white);
+    /* border-color: var(--wp--preset--color--asari-warm-gray); */
+    color: var(--wp--preset--color--asari-black);
+}
+
+/* Empty State */
+.team-swiper-empty {
+    text-align: center;
+    padding: var(--wp--preset--spacing--2-x-large);
+}
+
+/* Empty Placeholder */
+.wp-block-asari-team-swiper.is-empty-placeholder {
+    min-height: 200px;
+    background: var(--wp--preset--color--asari-warm-gray);
+    color: var(--wp--preset--color--asari-gray);
+    border: 2px dashed var(--wp--preset--color--asari-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Wide and Full Width Alignments */
+.wp-block-asari-team-swiper.alignwide .team-swiper-content {
+    max-width: var(--wp--style--global--wide-size);
+}
+
+.wp-block-asari-team-swiper.alignfull {
+    width: 100vw;
+    margin-left: calc(-100vw / 2 + 100% / 2);
+    margin-right: calc(-100vw / 2 + 100% / 2);
+}
+
+.wp-block-asari-team-swiper.alignfull .team-swiper-content {
+    max-width: var(--wp--style--global--content-size);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .team-swiper-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--wp--preset--spacing--large);
+    }
+    
+    .team-swiper-title {
+        max-width: none;
+    }
+    
+    .team-swiper-subtitle {
+        max-width: none;
+    }
+    
+    .swiper-slide {
+        width: 14rem; /* 224px */
+    }
+    
+    .team-member-image {
+        width: 14rem; /* 224px */
+        height: 16rem; /* 256px */
+    }
+}
+
+@media (max-width: 768px) {
+    .wp-block-asari-team-swiper {
+        padding: var(--wp--preset--spacing--x-large) 0;
+    }
+
+    .team-swiper-header-wrapper {
+        margin-bottom: var(--wp--preset--spacing--x-large);
+    }
+    
+    .team-swiper-content {
+        padding: 0 var(--wp--preset--spacing--medium);
+    }
+    
+    .team-swiper-wrapper .swiper {
+        padding: 0 var(--wp--preset--spacing--medium);
+    }
+    
+    .team-swiper-title {
+        font-size: var(--wp--preset--font-size--h-3);
+    }
+    
+    .team-swiper-subtitle {
+        font-size: var(--wp--preset--font-size--b-1);
+    }
+    
+    .swiper-slide {
+        width: 12rem; /* 192px */
+    }
+    
+    .team-member-image {
+        width: 12rem; /* 192px */
+        height: 14rem; /* 224px */
+    }
+    
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .swiper-button-prev {
+        left: var(--wp--preset--spacing--small);
+    }
+    
+    .swiper-button-next {
+        right: var(--wp--preset--spacing--small);
+    }
+}
+
+@media (max-width: 480px) {
+    .team-swiper-content {
+        padding: 0 var(--wp--preset--spacing--small);
+    }
+    
+    .team-swiper-wrapper .swiper {
+        padding: 0 var(--wp--preset--spacing--small);
+    }
+    
+    .swiper-slide {
+        width: 10rem; /* 160px */
+    }
+    
+    .team-member-image {
+        width: 10rem; /* 160px */
+        height: 12rem; /* 192px */
+    }
+    
+    .team-member-name {
+        font-size: var(--wp--preset--font-size--b-3);
+    }
+    
+    .team-member-position {
+        font-size: var(--wp--preset--font-size--b-5);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .wp-block-asari-team-swiper {
+        page-break-inside: avoid;
+    }
+    
+    .team-swiper-wrapper .swiper {
+        overflow: visible;
+    }
+    
+    .swiper-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wp--preset--spacing--medium);
+    }
+    
+    .swiper-slide {
+        width: auto;
+        flex: 0 0 calc(25% - var(--wp--preset--spacing--medium));
+    }
+    
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none;
+    }
+    
+    .team-member-bw {
+        opacity: 1 !important;
+    }
+    
+    .team-member-color {
+        opacity: 0 !important;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .team-member-bw,
+    .team-member-color,
+    .team-member-name,
+    .team-member-position,
+    .swiper-button-prev,
+    .swiper-button-next {
+        transition: none;
+        transform: none !important;
+        animation: none;
+    }
+    
+    .team-member-link:hover .team-member-bw {
+        transform: none;
+    }
+    
+    .team-member-link:hover .team-member-color {
+        transform: none;
+    }
+    
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
+        transform: translateY(-50%);
+    }
+}
+
+/* Focus states for accessibility */
+.team-member-link:focus {
+    outline: 2px solid var(--wp--preset--color--asari-gold);
+    outline-offset: 2px;
+    border-radius: var(--wp--preset--spacing--small);
+}
+
+.swiper-button-prev:focus,
+.swiper-button-next:focus {
+    outline: 2px solid var(--wp--preset--color--asari-gold);
+    outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        border-width: 2px;
+    }
+    
+    .team-member-image {
+        border: 1px solid var(--wp--preset--color--asari-black);
+    }
+}

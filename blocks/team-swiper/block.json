@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schemas.wp.org/wp/6.8/block.json",
+    "apiVersion": 3,
+    "name": "asari/team-swiper",
+    "title": "Team Swiper",
+    "description": "A swiper carousel displaying team members with hover effects",
+    "category": "asari-blocks",
+    "icon": "groups",
+    "keywords": ["team", "swiper", "carousel", "members", "employees"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "team-swiper.php"
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "blockGap": true
+        }
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "title": "Достигаем большего",
+                "subtitle": "Вместе с лучшими",
+                "description": "Подтверждаем экспертизу наградами и мировыми рейтингами",
+                "link": "#team"
+            }
+        }
+    },
+    "textdomain": "asari-legal-theme",
+    "script": "file:./team-swiper.js",
+    "editorScript": "file:./team-swiper-editor.js",
+    "editorStyle": "file:./team-swiper-editor.css",
+    "style": "file:./team-swiper.css"
+}
