@@ -16,8 +16,8 @@
     let prefersReducedMotion = false;
     
     // Configuration constants
-    const MIN_OPACITY = 0.4;        // Minimum opacity at screen edges
-    const PARALLAX_DISTANCE = 5;    // Maximum parallax distance in vh
+    const MIN_OPACITY = 0;        // Minimum opacity at screen edges
+    const PARALLAX_DISTANCE = 10;    // Maximum parallax distance in vh
     const FOOTER_THRESHOLD = 96;    // Footer activation threshold in pixels (6em)
     const VIEWPORT_BUFFER = 100;    // Buffer in pixels for smoother transitions
     
@@ -30,6 +30,74 @@
     
     function easeOutQuad(t) {
         return t * (2 - t);
+    }
+    
+    function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+    
+    function easeInCubic(t) {
+        return t * t * t;
+    }
+    
+    function easeOutCubic(t) {
+        return (--t) * t * t + 1;
+    }
+    
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    }
+    
+    function easeInQuart(t) {
+        return t * t * t * t;
+    }
+    
+    function easeOutQuart(t) {
+        return 1 - (--t) * t * t * t;
+    }
+    
+    function easeInOutQuart(t) {
+        return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * (--t) * t * t * t;
+    }
+    
+    function easeInSine(t) {
+        return 1 - Math.cos(t * Math.PI / 2);
+    }
+    
+    function easeOutSine(t) {
+        return Math.sin(t * Math.PI / 2);
+    }
+    
+    function easeInOutSine(t) {
+        return -(Math.cos(Math.PI * t) - 1) / 2;
+    }
+    
+    function easeInExpo(t) {
+        return t === 0 ? 0 : Math.pow(2, 10 * (t - 1));
+    }
+    
+    function easeOutExpo(t) {
+        return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+    
+    function easeInOutExpo(t) {
+        if (t === 0) return 0;
+        if (t === 1) return 1;
+        return t < 0.5 ? Math.pow(2, 20 * t - 10) / 2 : (2 - Math.pow(2, -20 * t + 10)) / 2;
+    }
+    
+    function easeInCirc(t) {
+        return 1 - Math.sqrt(1 - t * t);
+    }
+    
+    function easeOutCirc(t) {
+        return Math.sqrt(1 - (--t) * t);
+    }
+    
+    function easeInOutCirc(t) {
+        return t < 0.5 
+            ? (1 - Math.sqrt(1 - 4 * t * t)) / 2
+            : (Math.sqrt(1 - (-2 * t + 2) * (-2 * t + 2)) + 1) / 2;
     }
     
     /**
@@ -118,8 +186,8 @@
         
         // Calculate available height and target points
         availableHeight = window.innerHeight - headerHeight;
-        lowerTarget = headerHeight + (availableHeight * 0.33);  // First third
-        upperTarget = headerHeight + (availableHeight * 0.67);  // Second third
+        upperTarget = headerHeight + (availableHeight * 0.33);  // First third
+        lowerTarget = headerHeight + (availableHeight * 0.67);  // Second third
         
         console.log('Viewport metrics:', { headerHeight, availableHeight, lowerTarget, upperTarget });
     }
@@ -132,7 +200,7 @@
         const elementBottom = elementRect.bottom;
         
         // Check if element is in viewport (with buffer)
-        const isInViewport = elementBottom > -VIEWPORT_BUFFER && elementTop < window.innerHeight + VIEWPORT_BUFFER;
+        const isInViewport = elementBottom > -VIEWPORT_BUFFER*5 && elementTop < window.innerHeight + VIEWPORT_BUFFER*5;
         
         if (!isInViewport) {
             return { opacity: 1, translateY: 0 }; // Default state for off-screen elements
@@ -164,7 +232,7 @@
             
             // Calculate progress from extended screen bottom to upper target
             const progress = Math.max(0, Math.min(1, (journeyStart - elementTop) / (journeyStart - journeyEnd)));
-            const easedProgress = easeInQuad(progress);
+            const easedProgress = easeOutQuart(progress);
             
             const opacity = Math.max(MIN_OPACITY, MIN_OPACITY + (easedProgress * (1 - MIN_OPACITY))); // MIN_OPACITY → 1.0
             const translateY = PARALLAX_DISTANCE * (1 - easedProgress); // PARALLAX_DISTANCE → 0
@@ -180,7 +248,7 @@
             
             // Calculate progress from lower target to extended screen top
             const progress = Math.max(0, Math.min(1, (journeyStart - elementBottom) / (journeyStart - journeyEnd)));
-            const easedProgress = easeOutQuad(progress);
+            const easedProgress = easeOutQuart(progress);
             
             const opacity = Math.max(MIN_OPACITY, 1.0 - (easedProgress * (1 - MIN_OPACITY))); // 1.0 → MIN_OPACITY
             const translateY = -PARALLAX_DISTANCE * easedProgress; // 0 → -PARALLAX_DISTANCE
